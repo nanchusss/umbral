@@ -11,7 +11,7 @@ function SiteFooter({
 
       {showSocial ? (
         <div className="social-links">
-          <a href="https://www.instagram.com/umbral_premium" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://www.instagram.com/umbral.premium" target="_blank" rel="noreferrer">Instagram</a>
           <a href="mailto:nanchusss@icloud.com">Contacto</a>
         </div>
       ) : showEmailText ? (
