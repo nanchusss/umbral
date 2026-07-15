@@ -12,23 +12,23 @@ const companyAreas = [
 
 const companyStats = [
   {
-    title: 'Amplia gama de soluciones',
-    text: 'Con un alto grado de personalizacion con el que ofrecer una solucion integral para la totalidad del proyecto solo con productos propios.',
+    title: 'Expertos en primera calidad',
+    text: 'Asesoramos y vendemos soluciones premium con criterio tecnico y comercial, seleccionando siempre opciones de maxima calidad para cada proyecto.',
     icon: <FiCheckCircle size={32} />,
   },
   {
-    title: 'Sostenibilidad y eficiencia energetica',
-    text: 'Incorporamos la sostenibilidad como compromiso transversal en producto, fabricacion y filosofia de empresa.',
+    title: 'Proveedores top de Europa',
+    text: 'Trabajamos con proveedores europeos de referencia para garantizar acabados superiores, fiabilidad y rendimiento a largo plazo.',
     icon: <FiWind size={32} />,
   },
   {
-    title: 'Hecho en Espana',
-    text: 'Todos nuestros productos se proyectan y fabrican en Espana. Confianza y trazabilidad para entregas fiables y soporte cercano.',
+    title: 'Empresa seria y profesional',
+    text: 'Cumplimos plazos, cuidamos cada detalle de instalacion y mantenemos un seguimiento cercano antes, durante y despues de cada proyecto.',
     icon: <FiMapPin size={32} />,
   },
   {
-    title: '+65 anos de historia industrial',
-    text: 'Desde 1959 aportando soluciones que transforman espacios con evolucion constante y compromiso con nuestros clientes.',
+    title: '30 anos de experiencia en Umbral',
+    text: 'Tres decadas dedicadas al exterior premium nos avalan como un equipo solido, experto y enfocado en resultados duraderos.',
     icon: <FiAward size={32} />,
   },
 ];
@@ -39,9 +39,9 @@ function CompanyPage() {
       <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
         <div className="page-intro">
           <p className="eyebrow">Empresa</p>
-          <h1>Innovacion y capacidad productiva para cada espacio.</h1>
+          <h1>Sobre nosotros: experiencia, seriedad y primera calidad.</h1>
           <p className="hero-text">
-            Fabricamos soluciones de exterior premium con una estructura tecnica que combina diseno, confort y eficiencia en cada proyecto.
+            En Umbral llevamos 30 anos creando espacios exteriores premium. Somos especialistas en venta de primera calidad y trabajamos con los mejores proveedores de Europa para ofrecer soluciones fiables, elegantes y duraderas.
           </p>
         </div>
       </SiteHeader>
@@ -68,9 +68,9 @@ function CompanyPage() {
 
         <section className="company-universe" aria-label="Nuestro universo">
           <div className="company-universe-copy">
-            <h2>Nuestro universo</h2>
+            <h2>Sobre nosotros</h2>
             <p>
-              Cada persona y cada proyecto tienen su propio mundo y nosotros orbitamos a su alrededor, adaptandonos a cada necesidad con soluciones que protegen, transforman y embellecen.
+              Somos una empresa seria, con estructura tecnica y comercial consolidada, orientada a clientes que buscan excelencia real. Nuestra prioridad es ofrecer confianza, transparencia y resultados impecables en cada instalacion.
             </p>
             <a href="/productos" className="text-link">Ver todos los productos</a>
           </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiUsers, FiShield, FiMessageSquare, FiHome, FiMenu, FiX } from 'react-icons/fi';
+import { FiShield, FiMessageSquare, FiHome, FiMenu, FiX } from 'react-icons/fi';
 
 const productHighlights = [
   { title: 'Pergolas bioclimaticas', slug: '/productos/pergolas-bioclimaticas', image: '/images/pergolas.jpg', description: 'Sombra elegante y confort para exteriores.' },
@@ -11,7 +11,6 @@ const companyHighlights = [
   { title: 'Sobre nosotros', slug: '/empresa', description: 'Conoce la vision y cultura de Umbral.', icon: <FiHome size={26} /> },
   { title: 'Canal etico', slug: '/contacto', description: 'Comunicacion segura y responsable.', icon: <FiShield size={26} /> },
   { title: 'Comunicacion', slug: '/contacto', description: 'Prensa y canales de contacto.', icon: <FiMessageSquare size={26} /> },
-  { title: 'Portal del empleado/a', slug: '/contacto', description: 'Acceso al entorno interno.', icon: <FiUsers size={26} /> },
 ];
 
 function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) {

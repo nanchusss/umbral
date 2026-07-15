@@ -5,10 +5,75 @@ import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 
 function ProductDetailPage({ product }) {
+  const currentPath = window.location.pathname;
+  const breadcrumbTrail =
+    currentPath === '/productos/toldos/maresme' || currentPath === '/productos/toldos/girona'
+      ? [
+          { label: 'Productos', href: '/productos' },
+          { label: 'Toldos', href: '/productos/toldos' },
+          { label: product.collectionName || product.title },
+        ]
+      : [
+          { label: 'Productos', href: '/productos' },
+          { label: product.title },
+        ];
+
+  const collectionName = product.collectionName || 'Costa Brava';
+  const collectionItems = product.collectionItems || [
+    { eyebrow: 'Modelo', title: 'Cadaqués P-190', href: '/modelo/cadaques-p-190', cta: 'Ver modelo' },
+    { eyebrow: 'Modelo', title: 'Tossa P-150', href: '/modelo/tossa-p-150', cta: 'Ver modelo' },
+  ];
+  const collectionGroups = product.collectionGroups || [
+    {
+      title: collectionName,
+      subgroups: [
+        {
+          title: 'Modelos',
+          items: collectionItems,
+        },
+      ],
+    },
+  ];
+  const spotlightImage = product.spotlightImage || '/images/pergola_bioclimatica_p_190_principal.jpg';
+  const spotlightAlt = product.spotlightAlt || 'Solución Umbral';
+  const spotlightEyebrow = product.spotlightEyebrow || 'Propuesta Umbral';
+  const spotlightTitle = product.spotlightTitle || 'Una solución hecha para habitar el exterior con comodidad.';
+  const spotlightText = product.spotlightText || 'Integramos estructura, sombra y confort en una propuesta sobria, funcional y diseñada para el día a día.';
+  const benefitsTitle = product.benefitsTitle || 'Por qué elegir Umbral';
+  const benefitsSubtitle = product.benefitsSubtitle || 'Diseño preciso, confort duradero.';
+  const showcaseCards = product.showcaseCards || [
+    {
+      image: '/images/pergola_bioclimatica_p_190_principal.jpg',
+      alt: 'Pérgola bioclimática Umbral',
+      title: 'Pérgolas bioclimáticas',
+      text: 'Diseño mediterráneo, confort invisible y una presencia sobria.',
+    },
+    {
+      image: '/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9519.jpg',
+      alt: 'Proyecto Umbral en Atico Campello',
+      title: 'Exteriores singulares',
+      text: 'Soluciones a medida para proyectos de alto nivel.',
+    },
+    {
+      image: '/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9467_1.jpg',
+      alt: 'Detalle de proyecto Umbral',
+      title: 'Detalle de ejecución',
+      text: 'Arquitectura y funcionalidad en equilibrio perfecto.',
+    },
+  ];
+
   return (
     <div className="app-shell page-shell">
       <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
         <div className="page-intro">
+          <nav className="page-breadcrumbs" aria-label="Ruta de navegacion">
+            {breadcrumbTrail.map((item, index) => (
+              <span key={`${item.label}-${index}`} className="page-breadcrumb-item">
+                {item.href ? <a href={item.href}>{item.label}</a> : <span className="page-breadcrumb-current">{item.label}</span>}
+                {index < breadcrumbTrail.length - 1 && <span className="page-breadcrumb-sep">|</span>}
+              </span>
+            ))}
+          </nav>
           <p className="eyebrow">Producto</p>
           <h1>{product.title}</h1>
           <p className="hero-text">{product.intro}</p>
@@ -53,42 +118,50 @@ function ProductDetailPage({ product }) {
         <section className="editorial-section collection-section" aria-label="Colecciones Umbral">
           <div className="showcase-header">
             <p className="eyebrow">Colección</p>
-            <h3>Costa Brava</h3>
+            <h3>{collectionName}</h3>
           </div>
 
-          <div className="collection-list">
-            <a className="collection-card" href="/modelo/cadaques-p-190">
-              <div>
-                <p className="eyebrow">Modelo</p>
-                <h4>Cadaqués P-190</h4>
+          <div className="collection-groups">
+            {collectionGroups.map((group) => (
+              <div className="collection-group" key={group.title}>
+                <h4 className="collection-group-title">{group.title}</h4>
+
+                {(group.subgroups || []).map((subgroup) => (
+                  <div className="collection-subgroup" key={`${group.title}-${subgroup.title}`}>
+                    <h5 className="collection-subgroup-title">{subgroup.title}</h5>
+                    <div className="collection-list">
+                      {(subgroup.items || []).map((item) => (
+                        <a className="collection-card" href={item.href} key={`${group.title}-${subgroup.title}-${item.title}`}>
+                          <div>
+                            <p className="eyebrow">{item.eyebrow}</p>
+                            <h4>{item.title}</h4>
+                          </div>
+                          <span>{item.cta}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-              <span>Ver modelo</span>
-            </a>
-            <a className="collection-card" href="/modelo/tossa-p-150">
-              <div>
-                <p className="eyebrow">Modelo</p>
-                <h4>Tossa P-150</h4>
-              </div>
-              <span>Ver modelo</span>
-            </a>
+            ))}
           </div>
         </section>
 
         <section className="editorial-section spotlight-section" aria-label="Propuesta Umbral">
           <div className="spotlight-media">
-            <img src="/images/pergola_bioclimatica_p_190_principal.jpg" alt="Pérgola bioclimática Umbral" />
+            <img src={spotlightImage} alt={spotlightAlt} />
           </div>
           <div className="spotlight-copy">
-            <p className="eyebrow">Propuesta Umbral</p>
-            <h3>Una solución hecha para habitar el exterior con comodidad.</h3>
-            <p>Integramos estructura, sombra y confort en una propuesta sobria, funcional y diseñada para el día a día.</p>
+            <p className="eyebrow">{spotlightEyebrow}</p>
+            <h3>{spotlightTitle}</h3>
+            <p>{spotlightText}</p>
           </div>
         </section>
 
-        <section className="editorial-section showcase-icons" aria-label="Ventajas de las pérgolas bioclimáticas">
+        <section className="editorial-section showcase-icons" aria-label={`Ventajas de ${product.title}`}>
           <div className="showcase-header">
-            <p className="eyebrow">Por qué elegir Umbral</p>
-            <h3>Diseño preciso, confort duradero.</h3>
+            <p className="eyebrow">{benefitsTitle}</p>
+            <h3>{benefitsSubtitle}</h3>
           </div>
 
           <div className="icon-grid">
@@ -120,7 +193,7 @@ function ProductDetailPage({ product }) {
           </a>
         </section>
 
-        <section className="editorial-section image-showcase-section" aria-label="Proyectos destacados">
+        <section className="editorial-section image-showcase-section" aria-label={`Modelos y proyectos de ${product.title}`}>
           <div className="showcase-header">
             <p className="eyebrow">Proyectos destacados</p>
             <h3>Espacios que unen arquitectura, luz y serenidad.</h3>
@@ -128,27 +201,27 @@ function ProductDetailPage({ product }) {
 
           <div className="image-showcase-grid">
             <article className="image-card image-card-large">
-              <img src="/images/pergola_bioclimatica_p_190_principal.jpg" alt="Pérgola bioclimática Umbral" />
+              <img src={showcaseCards[0].image} alt={showcaseCards[0].alt} />
               <div className="image-card-copy">
-                <h4>Pérgolas bioclimáticas</h4>
-                <p>Diseño mediterráneo, confort invisible y una presencia sobria.</p>
+                <h4>{showcaseCards[0].title}</h4>
+                <p>{showcaseCards[0].text}</p>
               </div>
             </article>
 
             <div className="image-stack">
               <article className="image-card">
-                <img src="/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9519.jpg" alt="Proyecto Umbral en Atico Campello" />
+                <img src={showcaseCards[1].image} alt={showcaseCards[1].alt} />
                 <div className="image-card-copy">
-                  <h4>Exteriores singulares</h4>
-                  <p>Soluciones a medida para proyectos de alto nivel.</p>
+                  <h4>{showcaseCards[1].title}</h4>
+                  <p>{showcaseCards[1].text}</p>
                 </div>
               </article>
 
               <article className="image-card">
-                <img src="/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9467_1.jpg" alt="Detalle de proyecto Umbral" />
+                <img src={showcaseCards[2].image} alt={showcaseCards[2].alt} />
                 <div className="image-card-copy">
-                  <h4>Detalle de ejecución</h4>
-                  <p>Arquitectura y funcionalidad en equilibrio perfecto.</p>
+                  <h4>{showcaseCards[2].title}</h4>
+                  <p>{showcaseCards[2].text}</p>
                 </div>
               </article>
             </div>

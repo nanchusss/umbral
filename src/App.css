@@ -230,13 +230,14 @@ img {
 
 .company-section {
   max-width: 1380px;
+  padding-top: 30px;
 }
 
 .company-areas {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-bottom: 34px;
+  gap: 22px;
+  margin-bottom: 46px;
 }
 
 .company-area-card {
@@ -252,16 +253,17 @@ img {
 }
 
 .company-area-card h3 {
-  margin: 0;
-  font-size: 1.05rem;
+  margin: 2px 0 0;
+  font-size: 1.08rem;
+  line-height: 1.35;
   color: #232c31;
 }
 
 .company-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin: 10px 0 56px;
+  gap: 20px;
+  margin: 12px 0 62px;
 }
 
 .company-stat-card {
@@ -269,7 +271,10 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  padding: 18px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(111, 90, 60, 0.14);
 }
 
 .company-stat-icon {
@@ -295,8 +300,9 @@ img {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: end;
-  gap: 34px;
-  padding: 8px 0 30px;
+  gap: 36px;
+  padding: 26px 0 36px;
+  border-top: 1px solid rgba(111, 90, 60, 0.14);
 }
 
 .company-universe-copy h2 {
@@ -307,9 +313,9 @@ img {
 
 .company-universe-copy p {
   margin: 0 0 16px;
-  max-width: 560px;
+  max-width: 620px;
   color: #4f5962;
-  line-height: 1.65;
+  line-height: 1.72;
 }
 
 .company-universe-tabs {
@@ -437,10 +443,46 @@ img {
   gap: 18px;
 }
 
+.collection-groups {
+  display: grid;
+  gap: 20px;
+}
+
+.collection-group {
+  display: grid;
+  gap: 12px;
+}
+
+.collection-group-title {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #2f4652;
+}
+
+.collection-subgroup {
+  display: grid;
+  gap: 10px;
+}
+
+.collection-subgroup-title {
+  margin: 0;
+  font-size: 1rem;
+  color: #3a4e58;
+  letter-spacing: 0.03em;
+}
+
 .collection-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+}
+
+.collection-list .eyebrow {
+  margin-bottom: 8px;
+}
+
+.collection-list h4 {
+  line-height: 1.25;
 }
 
 .collection-card {
@@ -790,6 +832,10 @@ img {
     padding: 18px 16px 40px;
   }
 
+  .section-heading {
+    margin-bottom: 20px;
+  }
+
   .page-intro,
   .model-grid {
     padding-left: 0;
@@ -839,6 +885,43 @@ img {
   .company-universe {
     grid-template-columns: 1fr;
     align-items: start;
+    gap: 18px;
+    padding: 20px 0 26px;
+  }
+
+  .company-section {
+    padding-top: 14px;
+  }
+
+  .company-areas {
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .company-area-card h3 {
+    font-size: 1rem;
+  }
+
+  .company-stats {
+    gap: 14px;
+    margin: 8px 0 36px;
+  }
+
+  .company-stat-card {
+    padding: 14px 12px;
+  }
+
+  .company-stat-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .company-stat-card p {
+    font-size: 0.93rem;
+    line-height: 1.52;
+  }
+
+  .company-universe-tabs {
+    justify-content: flex-start;
   }
 
   .company-mega-menu {
@@ -1233,7 +1316,52 @@ img {
 
 .page-intro {
   max-width: 760px;
-  padding: 0 8px;
+  padding: 8px 8px 0;
+}
+
+.page-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5b6972;
+}
+
+.page-breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-breadcrumb-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.page-breadcrumb-current {
+  color: #2f4652;
+  font-weight: 600;
+}
+
+.page-breadcrumb-sep {
+  opacity: 0.55;
+}
+
+.page-intro h1 {
+  margin: 0 0 20px;
+  line-height: 1.06;
+}
+
+.page-intro .hero-text {
+  max-width: 700px;
+  line-height: 1.74;
 }
 
 .product-grid,
@@ -1271,20 +1399,21 @@ img {
 
 .products-star-intro {
   max-width: 760px;
-  margin: 0 auto 18px;
+  margin: 0 auto 28px;
   text-align: center;
 }
 
 .products-star-intro h2 {
-  margin: 6px 0 10px;
+  margin: 8px 0 14px;
   font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.12;
   color: #243640;
 }
 
 .products-star-intro p {
   margin: 0;
   color: #5a6470;
-  line-height: 1.6;
+  line-height: 1.72;
 }
 
 .product-star-card {
@@ -1374,12 +1503,14 @@ img {
 }
 
 .product-card h3 {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   font-size: 1.45rem;
+  line-height: 1.18;
 }
 
 .product-card p {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
+  line-height: 1.5;
   color: rgba(255,255,255,0.92);
 }
 
@@ -1388,6 +1519,135 @@ img {
   letter-spacing: 0.18em;
   font-size: 0.8rem;
   color: #f7f2e8;
+}
+
+.toldos-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.toldos-hub-card {
+  display: grid;
+  gap: 0;
+  border: 1px solid rgba(111, 90, 60, 0.14);
+  background: rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+}
+
+.toldos-hub-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.toldos-hub-copy {
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.toldos-hub-copy h3 {
+  margin: 0;
+  color: #2f4652;
+  font-size: 1.42rem;
+  line-height: 1.2;
+}
+
+.toldos-hub-copy p {
+  margin: 0;
+  color: #5a6470;
+  line-height: 1.65;
+}
+
+.toldos-hub-models {
+  margin: 2px 0 0;
+  padding-left: 1.1rem;
+  color: #405059;
+  display: grid;
+  gap: 6px;
+}
+
+.toldos-hub-models li {
+  line-height: 1.45;
+}
+
+.toldos-hub-models a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.toldos-hub-models a:hover {
+  text-decoration: underline;
+}
+
+.toldo-model-page {
+  display: grid;
+  gap: 22px;
+}
+
+.toldo-model-main {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.toldo-model-media {
+  background: #ecebe8;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.toldo-model-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.toldo-model-copy {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(111, 90, 60, 0.14);
+  padding: 20px;
+}
+
+.toldo-model-copy h2 {
+  margin: 0 0 10px;
+  color: #2f4652;
+  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+}
+
+.toldo-model-copy p,
+.toldo-model-copy li {
+  color: #5a6470;
+  line-height: 1.7;
+}
+
+.toldo-model-copy ul {
+  margin: 10px 0 0;
+  padding-left: 1.2rem;
+}
+
+.toldo-model-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.toldo-model-gallery-card {
+  background: #ecebe8;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.toldo-model-gallery-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  display: block;
 }
 
 .page-contact-card {
@@ -1658,8 +1918,80 @@ img {
 
 @media (max-width: 860px) {
   .product-grid,
-  .project-list {
+  .project-list,
+  .collection-list,
+  .toldos-hub-grid {
     grid-template-columns: 1fr;
+  }
+
+  .toldo-model-main,
+  .toldo-model-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .toldo-model-copy {
+    padding: 16px;
+  }
+
+  .toldo-model-media,
+  .toldo-model-media img,
+  .toldo-model-gallery-card,
+  .toldo-model-gallery-card img {
+    min-height: 220px;
+  }
+
+  .toldos-hub-image {
+    height: 220px;
+  }
+
+  .toldos-hub-copy {
+    padding: 16px;
+  }
+
+  .collection-groups {
+    gap: 16px;
+  }
+
+  .collection-group-title {
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+
+  .collection-subgroup-title {
+    font-size: 0.94rem;
+    line-height: 1.35;
+  }
+
+  .collection-card {
+    padding: 18px 16px;
+    gap: 12px;
+  }
+
+  .collection-card h4 {
+    font-size: 1.06rem;
+  }
+
+  .page-intro {
+    padding-top: 12px;
+  }
+
+  .page-breadcrumbs {
+    margin-bottom: 12px;
+    gap: 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .page-intro h1 {
+    margin-bottom: 16px;
+  }
+
+  .products-star-intro {
+    margin-bottom: 22px;
+  }
+
+  .products-star-intro h2 {
+    margin: 8px 0 12px;
   }
 
   .contact-showcase-grid {
@@ -1965,6 +2297,37 @@ img {
 }
 
 @media (max-width: 560px) {
+  .page-intro h1 {
+    font-size: clamp(2rem, 9.4vw, 2.8rem);
+    line-height: 1.02;
+  }
+
+  .page-intro .hero-text {
+    font-size: 0.97rem;
+    line-height: 1.62;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 9.4vw, 2.75rem);
+    line-height: 1.01;
+  }
+
+  .hero-text {
+    font-size: 0.97rem;
+    line-height: 1.62;
+  }
+
+  .section {
+    padding: 16px 14px 34px;
+  }
+
+  .panel,
+  .info-card,
+  .feature-block,
+  .contact-card {
+    padding: 16px;
+  }
+
   .model-page .hero h1 {
     font-size: clamp(2rem, 8.6vw, 2.6rem);
     line-height: 1.02;
