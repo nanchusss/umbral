@@ -45,6 +45,7 @@ const productPages = {
     title: 'Coleccion Maresme · Toldos de brazos extensibles',
     intro: 'Sombra flexible para terrazas y jardines con extension y recogida precisa, sin estructuras fijas.',
     image: '/images/aura.jpg',
+    scrollVideo: '/images/toldo.mp4',
     description: 'Los toldos de brazos extensibles ofrecen una solucion versatil para crear sombra en exterior sin estructuras fijas, con extension y recogida segun las necesidades del momento.',
     features: [
       'Extension y recogida segun uso',
@@ -200,7 +201,7 @@ const toldoModelPages = {
     image: '/images/herta.jpg',
     description: 'Herta ofrece una solucion fiable para crear sombra con estabilidad y un acabado de alta calidad.',
     features: ['Estructura resistente', 'Uso comodo y duradero', 'Ideal para terrazas residenciales y contract'],
-    gallery: ['/images/herta.jpg', '/images/herta_abierto_saxun_beige.png', '/images/toldos.jpg'],
+    gallery: ['/images/herta.jpg', '/images/herta_abierto_saxun_beige.png'],
   },
   '/productos/toldos/modelos/orus-i': {
     title: 'Orus I',
@@ -218,7 +219,7 @@ const toldoModelPages = {
     image: '/images/orus_i.jpg',
     description: 'Orus II esta pensado para quienes buscan una solucion de brazos extensibles con alto nivel de funcionalidad y presencia arquitectonica.',
     features: ['Extension adaptable segun necesidad', 'Diseno integrado en fachada', 'Confort termico y visual'],
-    gallery: ['/images/orus_i.jpg', '/images/toldos.jpg', '/images/terminal_cofre_1.jpg'],
+    gallery: ['/images/orus_i.jpg', '/images/toldo2.mp4', '/images/terminal_cofre_1.jpg'],
   },
   '/productos/toldos/modelos/wind-screen': {
     title: 'Wind Screen',

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiSun, FiShield, FiLayers, FiArrowRight } from 'react-icons/fi';
 import './App.css';
 import FloatingWhatsAppButton from './FloatingWhatsAppButton';
@@ -8,6 +8,33 @@ import SiteFooter from './SiteFooter';
 function App() {
   const [formData, setFormData] = useState({ nombre: '', email: '', telefono: '' });
   const [submitState, setSubmitState] = useState('idle');
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      type: 'video',
+      src: '/images/toldo1.mp4',
+      label: 'Video de pergola bioclimatica Umbral',
+    },
+    {
+      type: 'image',
+      src: '/images/pergola_bioclimatica_p_190_principal.jpg',
+      label: 'Pergola bioclimatica principal Umbral',
+    },
+    {
+      type: 'image',
+      src: '/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9519.jpg',
+      label: 'Proyecto pergola en atico Campello',
+    },
+  ];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5200);
+
+    return () => window.clearInterval(timer);
+  }, [heroSlides.length]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -49,6 +76,26 @@ function App() {
     <div className="app-shell">
       <SiteHeader heroClassName="hero editorial-hero" links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
         <div className="hero-image-panel">
+          <div className="hero-media-carousel" aria-label="Carrusel principal Umbral">
+            {heroSlides.map((slide, index) => (
+              <div key={slide.src} className={`hero-media-slide ${activeHeroSlide === index ? 'is-active' : ''}`}>
+                {slide.type === 'video' ? (
+                  <video src={slide.src} autoPlay muted loop playsInline preload="metadata" aria-label={slide.label} />
+                ) : (
+                  <img src={slide.src} alt={slide.label} loading="eager" />
+                )}
+              </div>
+            ))}
+
+            <div className="hero-media-overlay" />
+
+            <div className="hero-media-dots" aria-label="Estado del carrusel">
+              {heroSlides.map((slide, index) => (
+                <span key={`${slide.src}-dot`} className={`hero-media-dot ${activeHeroSlide === index ? 'is-active' : ''}`} />
+              ))}
+            </div>
+          </div>
+
           <div className="hero-image-copy">
             <p className="eyebrow">Pérgolas bioclimáticas · Toldos · Cortinas de cristal</p>
             <h1>Arquitectura de exterior, hecha para habitar con calma.</h1>

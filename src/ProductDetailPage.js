@@ -6,6 +6,8 @@ import SiteFooter from './SiteFooter';
 
 function ProductDetailPage({ product }) {
   const currentPath = window.location.pathname;
+  const normalizedPath = currentPath.endsWith('/') && currentPath !== '/' ? currentPath.slice(0, -1) : currentPath;
+  const isMaresmeCollectionPage = normalizedPath === '/productos/toldos/maresme';
   const breadcrumbTrail =
     currentPath === '/productos/toldos/maresme' || currentPath === '/productos/toldos/girona'
       ? [
@@ -146,6 +148,15 @@ function ProductDetailPage({ product }) {
             ))}
           </div>
         </section>
+
+        {isMaresmeCollectionPage && product.scrollVideo && (
+          <section className="product-video-section" aria-label="Video de la coleccion Maresme">
+            <video className="product-detail-video" src={product.scrollVideo} autoPlay muted loop playsInline controls poster={product.image} />
+            <div className="product-video-badge">
+              <p>Video de la coleccion Maresme</p>
+            </div>
+          </section>
+        )}
 
         <section className="editorial-section spotlight-section" aria-label="Propuesta Umbral">
           <div className="spotlight-media">

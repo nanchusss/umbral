@@ -63,7 +63,7 @@ img {
   color: #4c5960;
   align-items: center;
   min-height: 40px;
-  margin-right: 0;
+  margin-right: 10px;
 }
 
 .desktop-nav-items {
@@ -342,19 +342,76 @@ img {
 .hero-image-panel {
   min-height: 84vh;
   border-radius: 0;
-  background-image: url('../public/images/pergola_bioclimatica_p_190_principal.jpg');
-  background-size: cover;
-  background-position: center;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: flex-end;
   padding: 42px 24px;
   box-shadow: none;
 }
 
+.hero-media-carousel {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-media-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 680ms ease;
+}
+
+.hero-media-slide.is-active {
+  opacity: 1;
+}
+
+.hero-media-slide img,
+.hero-media-slide video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.hero-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(16, 24, 30, 0.62) 8%, rgba(16, 24, 30, 0.2) 45%, rgba(16, 24, 30, 0.08) 100%);
+}
+
+.hero-media-dots {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  gap: 7px;
+  z-index: 2;
+}
+
+.hero-media-dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(247, 242, 232, 0.44);
+  transition: transform 220ms ease, background 220ms ease;
+}
+
+.hero-media-dot.is-active {
+  transform: scale(1.18);
+  background: rgba(247, 242, 232, 0.94);
+}
+
 .hero-image-copy {
   max-width: 700px;
   color: #f7f2e8;
   padding-left: 6px;
+  position: relative;
+  z-index: 3;
 }
 
 .hero-image-copy h1 {
@@ -1533,6 +1590,8 @@ img {
   border: 1px solid rgba(111, 90, 60, 0.14);
   background: rgba(255, 255, 255, 0.7);
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 }
 
 .toldos-hub-image {
@@ -1570,15 +1629,30 @@ img {
 
 .toldos-hub-models li {
   line-height: 1.45;
+  color: #405059;
 }
 
-.toldos-hub-models a {
-  color: inherit;
-  text-decoration: none;
+.toldos-hub-cta .underline-word {
+  position: relative;
+  display: inline-block;
 }
 
-.toldos-hub-models a:hover {
-  text-decoration: underline;
+.toldos-hub-cta .underline-word::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 260ms ease;
+}
+
+.toldos-hub-card:hover .toldos-hub-cta .underline-word::after,
+.toldos-hub-card:focus-visible .toldos-hub-cta .underline-word::after {
+  transform: scaleX(1);
 }
 
 .toldo-model-page {
@@ -1643,6 +1717,14 @@ img {
 }
 
 .toldo-model-gallery-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.toldo-model-gallery-card video {
   width: 100%;
   height: 100%;
   min-height: 220px;
@@ -1936,7 +2018,8 @@ img {
   .toldo-model-media,
   .toldo-model-media img,
   .toldo-model-gallery-card,
-  .toldo-model-gallery-card img {
+  .toldo-model-gallery-card img,
+  .toldo-model-gallery-card video {
     min-height: 220px;
   }
 
@@ -2213,7 +2296,8 @@ img {
   .card-grid,
   .split-section,
   .showcase,
-  .contact-card {
+  .contact-card,
+  .info-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2294,6 +2378,35 @@ img {
   .model-page .model-visual-card img {
     max-height: 340px;
   }
+
+  .contact-card {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .contact-copy {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .contact-form {
+    width: min(100%, 460px);
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .contact-form .primary-btn {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .form-success {
+    text-align: center;
+  }
 }
 
 @media (max-width: 560px) {
@@ -2326,6 +2439,41 @@ img {
   .feature-block,
   .contact-card {
     padding: 16px;
+  }
+
+  .contact-section {
+    padding-bottom: 52px;
+  }
+
+  .contact-card {
+    max-width: 420px;
+    margin: 0 auto;
+    gap: 14px;
+  }
+
+  .contact-copy h3,
+  .contact-copy p {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 34ch;
+    text-align: center;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .contact-form label {
+    display: block;
+    text-align: left;
+  }
+
+  .contact-form input,
+  .contact-form .primary-btn {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .model-page .hero h1 {

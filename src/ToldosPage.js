@@ -50,7 +50,7 @@ function ToldosPage() {
       <main className="section">
         <section className="toldos-hub-grid" aria-label="Colecciones de toldos">
           {toldosCollections.map((collection) => (
-            <article className="toldos-hub-card" key={collection.title}>
+            <a className="toldos-hub-card" key={collection.title} href={collection.href}>
               <img src={collection.image} alt={collection.title} className="toldos-hub-image" />
               <div className="toldos-hub-copy">
                 <p className="eyebrow">{collection.subtitle}</p>
@@ -58,16 +58,14 @@ function ToldosPage() {
                 <p>{collection.description}</p>
                 <ul className="toldos-hub-models" aria-label={`Modelos de ${collection.title}`}>
                   {collection.models.map((model) => (
-                    <li key={model.title}>
-                      <a href={model.href}>{model.title}</a>
-                    </li>
+                    <li key={model.title}>{model.title}</li>
                   ))}
                 </ul>
-                <a href={collection.href} className="text-link">
-                  Ver coleccion <FiArrowRight />
-                </a>
+                <span className="text-link toldos-hub-cta">
+                  <span className="underline-word">Ver coleccion</span> <FiArrowRight />
+                </span>
               </div>
-            </article>
+            </a>
           ))}
         </section>
       </main>

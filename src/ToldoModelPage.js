@@ -18,6 +18,8 @@ function ToldoModelPage({ model }) {
 
   const galleryImages = (model.gallery || []).filter((image) => image !== model.image);
 
+  const isVideoFile = (mediaPath) => /\.(mp4|webm|mov)$/i.test(mediaPath);
+
   return (
     <div className="app-shell page-shell">
       <SiteHeader links={[{ label: 'Toldos', href: '/productos/toldos' }, { label: 'Contacto', href: '/contacto' }]}>
@@ -50,13 +52,22 @@ function ToldoModelPage({ model }) {
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
+            {!isWindScreenModel && (
+              <a className="text-link" href="https://www.instagram.com/umbral_premium/" target="_blank" rel="noreferrer">
+                Video Instagram <FiArrowRight />
+              </a>
+            )}
           </div>
         </section>
 
         <section className="toldo-model-gallery" aria-label={`Fotos de ${model.title}`}>
           {galleryImages.map((image, index) => (
             <article className="toldo-model-gallery-card" key={`${model.title}-${image}`}>
-              <img src={image} alt={`${model.title} foto ${index + 1}`} />
+              {isVideoFile(image) ? (
+                <video src={image} autoPlay muted loop playsInline controls aria-label={`${model.title} video ${index + 1}`} />
+              ) : (
+                <img src={image} alt={`${model.title} foto ${index + 1}`} />
+              )}
             </article>
           ))}
         </section>
