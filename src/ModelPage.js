@@ -57,7 +57,15 @@ function ModelPage() {
             </p>
             <div className="hero-actions">
               <a className="primary-btn" href="#contacto">Solicitar información</a>
-              <a className="secondary-btn" href="https://www.instagram.com/umbral.premium" target="_blank" rel="noreferrer">Ver inspiración</a>
+              <a
+                className="secondary-btn"
+                href="https://www.instagram.com/umbral_premium/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Ver Instagram de Umbral Premium"
+              >
+                Ver inspiración
+              </a>
             </div>
           </div>
 
@@ -170,7 +178,7 @@ function ModelPage() {
               <p>Escríbenos y prepararemos una propuesta personalizada para el modelo Cadaqués P-190 y otros proyectos premium en Cataluña.</p>
             </div>
             <div className="hero-actions">
-              <a className="primary-btn" href="mailto:nanchusss@icloud.com">Solicitar información</a>
+              <a className="primary-btn" href="/contacto">Solicitar información</a>
             </div>
           </div>
         </section>

@@ -9,9 +9,9 @@ const productHighlights = [
 
 const companyHighlights = [
   { title: 'Sobre nosotros', slug: '/empresa', description: 'Conoce la vision y cultura de Umbral.', icon: <FiHome size={26} /> },
-  { title: 'Canal etico', slug: 'mailto:nanchusss@icloud.com?subject=Canal%20Etico%20Umbral', description: 'Comunicacion segura y responsable.', icon: <FiShield size={26} /> },
+  { title: 'Canal etico', slug: '/contacto', description: 'Comunicacion segura y responsable.', icon: <FiShield size={26} /> },
   { title: 'Comunicacion', slug: '/contacto', description: 'Prensa y canales de contacto.', icon: <FiMessageSquare size={26} /> },
-  { title: 'Portal del empleado/a', slug: 'mailto:nanchusss@icloud.com?subject=Portal%20Empleado%20Umbral', description: 'Acceso al entorno interno.', icon: <FiUsers size={26} /> },
+  { title: 'Portal del empleado/a', slug: '/contacto', description: 'Acceso al entorno interno.', icon: <FiUsers size={26} /> },
 ];
 
 function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) {

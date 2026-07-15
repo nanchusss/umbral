@@ -709,6 +709,24 @@ img {
   border-color: rgba(111, 90, 60, 0.45);
 }
 
+.footer-links-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.footer-contact-link {
+  font-weight: 600;
+}
+
+.footer-phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
 .social-links {
   display: flex;
   gap: 16px;
@@ -831,6 +849,10 @@ img {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .footer-links-group {
+    gap: 10px;
   }
 }
 
@@ -1880,5 +1902,81 @@ img {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .model-page .section {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .model-page .hero-copy,
+  .model-page .contact-copy,
+  .model-page .section-heading {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .model-page .hero-actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .model-page .hero-actions .primary-btn,
+  .model-page .hero-actions .secondary-btn {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .model-page .info-card,
+  .model-page .technical-item,
+  .model-page .contact-card {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .model-page .info-card p,
+  .model-page .technical-title,
+  .model-page .technical-content,
+  .model-page .contact-copy p,
+  .model-page .contact-copy h3 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .model-page .technical-accordion {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .model-page .technical-trigger {
+    padding: 13px 14px;
+    gap: 10px;
+  }
+
+  .model-page .technical-content {
+    padding: 0 14px 14px;
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+
+  .model-page .model-visual-card img {
+    max-height: 340px;
+  }
+}
+
+@media (max-width: 560px) {
+  .model-page .hero h1 {
+    font-size: clamp(2rem, 8.6vw, 2.6rem);
+    line-height: 1.02;
+  }
+
+  .model-page .section-heading h3,
+  .model-page .contact-copy h3 {
+    font-size: clamp(1.22rem, 6vw, 1.55rem);
+    line-height: 1.24;
+  }
+
+  .model-page .model-visual-card img {
+    max-height: 280px;
   }
 }
