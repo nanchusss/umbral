@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { FiChevronDown } from 'react-icons/fi';
 import './App.css';
 import FloatingWhatsAppButton from './FloatingWhatsAppButton';
 import SiteHeader from './SiteHeader';
@@ -9,7 +11,40 @@ const galleryImages = [
   '/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9519.jpg',
 ];
 
+const technicalItems = [
+  {
+    title: 'Lamas orientables',
+    content: 'Lamas de aluminio orientables para regular luz, ventilacion y privacidad con un movimiento preciso y silencioso.',
+  },
+  {
+    title: 'Estructura y materiales',
+    content: 'Estructura de aluminio extrusionado de alta resistencia con acabados premium pensados para larga durabilidad en exterior.',
+  },
+  {
+    title: 'Motorizacion',
+    content: 'Accionamiento motorizado para apertura y cierre comodos, con posibilidad de integracion en sistemas domoticos.',
+  },
+  {
+    title: 'Estanqueidad y drenaje',
+    content: 'Sistema de drenaje integrado en la propia estructura para evacuar el agua de lluvia de forma eficiente.',
+  },
+  {
+    title: 'Personalizacion',
+    content: 'Configuracion a medida en dimensiones, color, cerramientos y extras para adaptarse a cada proyecto arquitectonico.',
+  },
+  {
+    title: 'Instalacion profesional',
+    content: 'Servicio de instalacion profesional disponible para asegurar rendimiento optimo, seguridad y acabado final impecable.',
+  },
+];
+
 function ModelPage() {
+  const [openItem, setOpenItem] = useState(0);
+
+  const handleToggle = (index) => {
+    setOpenItem((prev) => (prev === index ? -1 : index));
+  };
+
   return (
     <div className="app-shell model-page">
       <SiteHeader heroClassName="hero model-hero" links={[{ label: 'Detalles', href: '#detalles' }, { label: 'Contacto', href: '#contacto' }]}>
@@ -84,6 +119,46 @@ function ModelPage() {
               <h4>Materiales</h4>
               <p>Acabados nobles y una ejecución cuidada, pensada para residencias, hoteles y proyectos premium.</p>
             </article>
+          </div>
+        </section>
+
+        <section className="section technical-section" aria-label="Especificaciones tecnicas del modelo Cadaques P-190">
+          <div className="section-heading">
+            <p className="eyebrow">Detalles tecnicos</p>
+            <h3>Especificaciones clave del modelo Cadaques P-190.</h3>
+          </div>
+
+          <div className="technical-cta">
+            <p>
+              Descubre las caracteristicas tecnicas que convierten al Cadaques P-190 en una solucion premium para proyectos residenciales y contract.
+            </p>
+          </div>
+
+          <div className="technical-accordion">
+            {technicalItems.map((item, index) => {
+              const isOpen = openItem === index;
+
+              return (
+                <article className="technical-item" key={item.title}>
+                  <button
+                    type="button"
+                    className="technical-trigger"
+                    onClick={() => handleToggle(index)}
+                    aria-expanded={isOpen}
+                    aria-controls={`technical-content-${index}`}
+                  >
+                    <span className="technical-title">{item.title}</span>
+                    <FiChevronDown className={`technical-chevron ${isOpen ? 'open' : ''}`} size={18} />
+                  </button>
+
+                  {isOpen && (
+                    <p id={`technical-content-${index}`} className="technical-content">
+                      {item.content}
+                    </p>
+                  )}
+                </article>
+              );
+            })}
           </div>
         </section>
 
