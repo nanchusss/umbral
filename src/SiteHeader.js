@@ -47,6 +47,12 @@ function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) 
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  const mobileMenuLinks = [
+    { label: 'Productos', href: '/productos' },
+    { label: 'Empresa', href: '/empresa' },
+    ...links,
+  ].filter((item, index, source) => source.findIndex((entry) => entry.href === item.href) === index);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen((prev) => {
       const next = !prev;
@@ -103,13 +109,16 @@ function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) 
                 Empresa
               </button>
             </div>
+
+            {links.map((item) => (
+              <a key={`${item.href}-${item.label}`} className="desktop-nav-link" href={item.href} onClick={closeMobileMenu}>
+                {item.label}
+              </a>
+            ))}
           </div>
 
-          <a className="mobile-only-nav-link" href="/productos" onClick={closeMobileMenu}>Productos</a>
-          <a className="mobile-only-nav-link" href="/empresa" onClick={closeMobileMenu}>Empresa</a>
-
-          {links.map((item) => (
-            <a key={`${item.href}-${item.label}`} href={item.href} onClick={closeMobileMenu}>
+          {mobileMenuLinks.map((item) => (
+            <a key={`${item.href}-${item.label}`} className="mobile-nav-link" href={item.href} onClick={closeMobileMenu}>
               {item.label}
             </a>
           ))}

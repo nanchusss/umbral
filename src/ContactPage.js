@@ -6,6 +6,7 @@ import FloatingWhatsAppButton from './FloatingWhatsAppButton';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import { EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_TO_EMAIL } from './emailjsConfig';
+import { getLeadAttribution, trackEvent } from './automation';
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -79,9 +80,16 @@ function ContactPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const attribution = getLeadAttribution();
 
     if (!validateForm()) {
       setSubmitState('invalid');
+      trackEvent('lead_form_submit', {
+        form_name: 'contact_page',
+        status: 'invalid',
+        product_interest: formData.producto,
+        lead_source: attribution.utm_source || 'direct',
+      });
       return;
     }
 
@@ -99,6 +107,12 @@ function ContactPage() {
           product_interest: formData.producto,
           message: formData.mensaje,
           website: 'Umbral',
+          lead_source: attribution.utm_source || 'direct',
+          lead_medium: attribution.utm_medium || 'none',
+          lead_campaign: attribution.utm_campaign || 'none',
+          landing_path: attribution.first_landing_path || '',
+          page_path: attribution.current_path || window.location.pathname,
+          referrer: attribution.first_referrer || attribution.current_referrer || '',
         },
         EMAILJS_PUBLIC_KEY
       );
@@ -111,8 +125,20 @@ function ContactPage() {
         mensaje: '',
       });
       setSubmitState('success');
+      trackEvent('lead_form_submit', {
+        form_name: 'contact_page',
+        status: 'success',
+        product_interest: formData.producto,
+        lead_source: attribution.utm_source || 'direct',
+      });
     } catch (error) {
       setSubmitState('error');
+      trackEvent('lead_form_submit', {
+        form_name: 'contact_page',
+        status: 'error',
+        product_interest: formData.producto,
+        lead_source: attribution.utm_source || 'direct',
+      });
     }
   };
 
@@ -145,7 +171,17 @@ function ContactPage() {
               </article>
             </div>
 
-            <a className="text-link" href="https://wa.me/34691292245?text=Hola%2C%20os%20escribo%20desde%20la%20pagina%20web%20de%20Umbral.%20Me%20gustaria%20recibir%20informacion%20sobre%20vuestras%20soluciones." target="_blank" rel="noreferrer">
+            <a
+              className="text-link"
+              href="https://wa.me/34691292245?text=Hola%2C%20os%20escribo%20desde%20la%20pagina%20web%20de%20Umbral.%20Me%20gustaria%20recibir%20informacion%20sobre%20vuestras%20soluciones."
+              target="_blank"
+              rel="noreferrer"
+              onClick={() =>
+                trackEvent('whatsapp_click', {
+                  placement: 'contact_page',
+                })
+              }
+            >
               Hablar por WhatsApp
             </a>
           </div>

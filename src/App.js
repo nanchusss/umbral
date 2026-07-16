@@ -6,6 +6,7 @@ import FloatingWhatsAppButton from './FloatingWhatsAppButton';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import { EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_TO_EMAIL } from './emailjsConfig';
+import { getLeadAttribution, trackEvent } from './automation';
 
 function App() {
   const [formData, setFormData] = useState({ nombre: '', email: '', telefono: '' });
@@ -46,6 +47,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitState('sending');
+    const attribution = getLeadAttribution();
 
     try {
       await emailjs.send(
@@ -60,14 +62,32 @@ function App() {
           message: 'Solicitud enviada desde el formulario del Home.',
           website: 'Umbral',
           subject: 'Solicitud de presupuesto Umbral',
+          lead_source: attribution.utm_source || 'direct',
+          lead_medium: attribution.utm_medium || 'none',
+          lead_campaign: attribution.utm_campaign || 'none',
+          landing_path: attribution.first_landing_path || '',
+          page_path: attribution.current_path || window.location.pathname,
+          referrer: attribution.first_referrer || attribution.current_referrer || '',
         },
         { publicKey: EMAILJS_PUBLIC_KEY }
       );
 
       setFormData({ nombre: '', email: '', telefono: '' });
       setSubmitState('success');
+      trackEvent('lead_form_submit', {
+        form_name: 'home_contact',
+        status: 'success',
+        product_interest: 'Home',
+        lead_source: attribution.utm_source || 'direct',
+      });
     } catch (error) {
       setSubmitState('error');
+      trackEvent('lead_form_submit', {
+        form_name: 'home_contact',
+        status: 'error',
+        product_interest: 'Home',
+        lead_source: attribution.utm_source || 'direct',
+      });
     }
   };
 

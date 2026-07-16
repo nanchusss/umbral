@@ -10,6 +10,8 @@ import CompanyPage from './CompanyPage';
 import ProductDetailPage from './ProductDetailPage';
 import ToldosPage from './ToldosPage';
 import ToldoModelPage from './ToldoModelPage';
+import { persistAttributionFromUrl } from './automation';
+import { initAnalytics } from './analytics';
 import reportWebVitals from './reportWebVitals';
 
 const path = window.location.pathname;
@@ -311,6 +313,9 @@ const toldoModelPages = {
 const product = productPages[path];
 const toldoModel = toldoModelPages[path];
 const renderedPage = isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
+
+initAnalytics();
+persistAttributionFromUrl();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

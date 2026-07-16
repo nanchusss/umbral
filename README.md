@@ -1,5 +1,62 @@
 # Getting Started with Create React App
 
+## Marketing Automation Setup (GA4 + GTM + Leads)
+
+This project already tracks lead forms and WhatsApp clicks in `src/automation.js`.
+
+### 1) Configure environment variables
+
+Create a `.env` file in project root using `.env.example` as base:
+
+```env
+REACT_APP_EMAILJS_SERVICE_ID=...
+REACT_APP_EMAILJS_TEMPLATE_ID=...
+REACT_APP_EMAILJS_PUBLIC_KEY=...
+REACT_APP_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+REACT_APP_GTM_ID=GTM-XXXXXXX
+```
+
+### 2) Restart app after changing `.env`
+
+```bash
+npm start
+```
+
+### 3) Where data arrives
+
+- Lead emails: EmailJS destination inbox configured in your EmailJS template.
+- Analytics events: Google Analytics 4 (and GTM if configured).
+
+### 4) Events already implemented
+
+- `lead_form_submit`:
+	- `form_name` (`home_contact`, `contact_page`)
+	- `status` (`success`, `error`, `invalid`)
+	- `product_interest`
+	- `lead_source`
+- `whatsapp_click`:
+	- `placement` (`floating_button`, `contact_page`)
+
+### 5) Attribution fields sent with leads
+
+When forms are submitted, these fields are included in the EmailJS payload:
+
+- `lead_source`
+- `lead_medium`
+- `lead_campaign`
+- `landing_path`
+- `page_path`
+- `referrer`
+
+These are captured from UTM query params and first touch/referrer data stored in browser localStorage.
+
+### 6) Recommended GA4 conversion setup
+
+In GA4, mark these events as conversions:
+
+- `lead_form_submit` filtered by `status = success`
+- `whatsapp_click`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
