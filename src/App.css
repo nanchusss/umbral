@@ -516,6 +516,15 @@ img {
   color: #3a4850;
 }
 
+.company-presence-list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.company-presence-list a:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 900px) {
   .company-ethics-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

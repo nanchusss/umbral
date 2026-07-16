@@ -75,10 +75,10 @@ const ethicalValues = [
 ];
 
 const cataloniaPresence = [
-  'Barcelona y area metropolitana',
-  'Girona y Costa Brava',
-  'Tarragona y Costa Daurada',
-  'Lleida y entorno interior',
+  { label: 'Barcelona y area metropolitana', href: '/barcelona' },
+  { label: 'Girona y Costa Brava', href: '/girona' },
+  { label: 'Tarragona y Costa Daurada', href: '/tarragona' },
+  { label: 'Lleida y entorno interior', href: '/lleida' },
 ];
 
 function CompanyPage() {
@@ -172,7 +172,9 @@ function CompanyPage() {
 
             <ul className="company-presence-list" aria-label="Zonas de presencia">
               {cataloniaPresence.map((zone) => (
-                <li key={zone}>{zone}</li>
+                <li key={zone.href}>
+                  <a href={zone.href}>{zone.label}</a>
+                </li>
               ))}
             </ul>
           </div>

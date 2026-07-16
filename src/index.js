@@ -7,6 +7,7 @@ import ProductsPage from './ProductsPage';
 import ProjectsPage from './ProjectsPage';
 import ContactPage from './ContactPage';
 import CompanyPage from './CompanyPage';
+import CityLandingPage from './CityLandingPage';
 import ProductDetailPage from './ProductDetailPage';
 import ToldosPage from './ToldosPage';
 import ToldoModelPage from './ToldoModelPage';
@@ -23,6 +24,57 @@ const isProjectsPage = path.includes('/proyectos');
 const isContactPage = path.includes('/contacto');
 const isCompanyPage = path.includes('/empresa');
 const isToldosLanding = path === '/productos/toldos' || path === '/productos/toldos/';
+
+const cityPages = {
+  '/barcelona': {
+    name: 'Barcelona',
+    eyebrow: 'Umbral Barcelona',
+    h1: 'Pergolas bioclimaticas en Barcelona con instalacion premium.',
+    intro: 'Soluciones exteriores para viviendas, terrazas y proyectos contract en Barcelona y area metropolitana.',
+    areas: ['Barcelona ciudad', 'Sant Cugat del Valles', 'Castelldefels', 'Gava', 'Badalona', 'Hospitalet de Llobregat'],
+    serviceHighlights: [
+      { title: 'Pergolas bioclimaticas', text: 'Control solar preciso y diseno contemporaneo para exteriores de alto nivel.' },
+      { title: 'Toldos a medida', text: 'Sistemas premium para terrazas y porches con instalacion profesional.' },
+      { title: 'Cortinas de cristal', text: 'Cerramientos elegantes para ampliar uso del espacio exterior todo el ano.' },
+    ],
+  },
+  '/girona': {
+    name: 'Girona',
+    eyebrow: 'Umbral Girona',
+    h1: 'Pergolas bioclimaticas en Girona para exteriores de alto valor.',
+    intro: 'Diseno e instalacion de pergolas, toldos y cerramientos en Girona y Costa Brava.',
+    areas: ['Girona ciudad', 'Blanes', 'Lloret de Mar', 'Sant Feliu de Guixols', 'Palamos', 'Roses'],
+    serviceHighlights: [
+      { title: 'Pergolas premium', text: 'Proyectos a medida para viviendas y hospitality en Girona.' },
+      { title: 'Wind Screen y toldos', text: 'Proteccion solar y lateral para zonas expuestas al viento.' },
+      { title: 'Cierres de cristal', text: 'Mas confort, transparencia y aprovechamiento del exterior.' },
+    ],
+  },
+  '/tarragona': {
+    name: 'Tarragona',
+    eyebrow: 'Umbral Tarragona',
+    h1: 'Pergolas bioclimaticas en Tarragona con enfoque tecnico y estetico.',
+    intro: 'Instalaciones premium para Costa Daurada, viviendas particulares, hoteles y restauracion.',
+    areas: ['Tarragona ciudad', 'Reus', 'Salou', 'Cambrils', 'Torredembarra', 'Vila-seca'],
+    serviceHighlights: [
+      { title: 'Proyectos residenciales', text: 'Diseno exterior elegante con soluciones de sombra adaptadas al uso real.' },
+      { title: 'Sector horeca', text: 'Sistemas para terrazas comerciales con rendimiento diario y presencia premium.' },
+      { title: 'Instalacion profesional', text: 'Acompanamiento completo: visita, propuesta, ejecucion y seguimiento.' },
+    ],
+  },
+  '/lleida': {
+    name: 'Lleida',
+    eyebrow: 'Umbral Lleida',
+    h1: 'Pergolas bioclimaticas en Lleida para confort exterior durante todo el ano.',
+    intro: 'Soluciones de proteccion solar y cerramiento para viviendas y negocios en Lleida y provincia.',
+    areas: ['Lleida ciudad', 'Mollerussa', 'Balaguer', 'Tarrega', 'La Seu d Urgell', 'Cervera'],
+    serviceHighlights: [
+      { title: 'Control solar', text: 'Pergolas y toldos para mejorar confort termico en climas de alta exigencia.' },
+      { title: 'Proyectos a medida', text: 'Cada propuesta se adapta a orientacion, espacio y objetivo del cliente.' },
+      { title: 'Acabado premium', text: 'Materiales duraderos y lenguaje arquitectonico limpio.' },
+    ],
+  },
+};
 
 const productPages = {
   '/productos/pergolas-bioclimaticas': {
@@ -314,7 +366,8 @@ const toldoModelPages = {
 
 const product = productPages[path];
 const toldoModel = toldoModelPages[path];
-const renderedPage = isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
+const cityPage = cityPages[normalizedPath];
+const renderedPage = isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : cityPage ? <CityLandingPage city={cityPage} /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
 
 const defaultSeo = {
   title: 'Umbral | Pergolas bioclimaticas premium en Cataluna',
@@ -353,6 +406,26 @@ const seoByRoute = {
     title: 'Toldos Premium en Cataluna | Umbral',
     description: 'Toldos premium para terrazas y porches en Barcelona, Girona y toda Cataluna. Soluciones a medida con instalacion profesional.',
     keywords: 'toldos barcelona, toldos girona, toldos premium cataluna, instalacion toldos',
+  },
+  '/barcelona': {
+    title: 'Pergolas bioclimaticas en Barcelona | Umbral',
+    description: 'Diseno e instalacion de pergolas bioclimaticas, toldos y cortinas de cristal en Barcelona y area metropolitana.',
+    keywords: 'pergolas bioclimaticas barcelona, toldos barcelona, cortinas de cristal barcelona, pergolas premium barcelona',
+  },
+  '/girona': {
+    title: 'Pergolas bioclimaticas en Girona | Umbral',
+    description: 'Soluciones exteriores premium en Girona y Costa Brava: pergolas bioclimaticas, toldos y cerramientos de cristal.',
+    keywords: 'pergolas girona, toldos girona, pergolas bioclimaticas costa brava, cerramientos girona',
+  },
+  '/tarragona': {
+    title: 'Pergolas bioclimaticas en Tarragona | Umbral',
+    description: 'Instalacion de pergolas bioclimaticas y toldos en Tarragona y Costa Daurada para residencial y horeca.',
+    keywords: 'pergolas tarragona, toldos tarragona, pergolas bioclimaticas costa daurada, cerramientos tarragona',
+  },
+  '/lleida': {
+    title: 'Pergolas bioclimaticas en Lleida | Umbral',
+    description: 'Proyectos de pergolas bioclimaticas, toldos y cortinas de cristal en Lleida con acabados premium.',
+    keywords: 'pergolas lleida, toldos lleida, pergolas bioclimaticas lleida, cerramientos de cristal lleida',
   },
 };
 
