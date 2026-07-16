@@ -310,11 +310,12 @@ const toldoModelPages = {
 
 const product = productPages[path];
 const toldoModel = toldoModelPages[path];
+const renderedPage = isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />}
+    {renderedPage}
   </React.StrictMode>
 );
 

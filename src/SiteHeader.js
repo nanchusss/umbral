@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FiShield, FiMessageSquare, FiHome, FiMenu, FiX } from 'react-icons/fi';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const productHighlights = [
   { title: 'Pergolas bioclimaticas', slug: '/productos/pergolas-bioclimaticas', image: '/images/pergolas.jpg', description: 'Sombra elegante y confort para exteriores.' },
@@ -64,16 +65,6 @@ function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) 
           <img src="/images/logo.png" alt="Umbral logo" className="brand-logo" />
         </a>
 
-        <button
-          type="button"
-          className="mobile-nav-toggle"
-          aria-label={mobileMenuOpen ? 'Cerrar menu' : 'Abrir menu'}
-          aria-expanded={mobileMenuOpen}
-          onClick={toggleMobileMenu}
-        >
-          {mobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-        </button>
-
         <div className={`nav-links ${mobileMenuOpen ? 'is-open' : ''}`}>
           <div className="desktop-nav-items">
             <div
@@ -122,6 +113,19 @@ function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) 
               {item.label}
             </a>
           ))}
+        </div>
+
+        <div className="topbar-right">
+          <LanguageSwitcher mode="header" />
+          <button
+            type="button"
+            className="mobile-nav-toggle"
+            aria-label={mobileMenuOpen ? 'Cerrar menu' : 'Abrir menu'}
+            aria-expanded={mobileMenuOpen}
+            onClick={toggleMobileMenu}
+          >
+            {mobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+          </button>
         </div>
       </nav>
 
