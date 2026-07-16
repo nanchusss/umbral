@@ -15,6 +15,8 @@ import { initAnalytics } from './analytics';
 import reportWebVitals from './reportWebVitals';
 
 const path = window.location.pathname;
+const SITE_URL = 'https://umbral.premium';
+const normalizedPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
 const isModelPage = path.startsWith('/modelo/') || path === '/modelo' || path.includes('/cadaques-p-190');
 const isProductsPage = path.includes('/productos');
 const isProjectsPage = path.includes('/proyectos');
@@ -313,6 +315,122 @@ const toldoModelPages = {
 const product = productPages[path];
 const toldoModel = toldoModelPages[path];
 const renderedPage = isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
+
+const defaultSeo = {
+  title: 'Umbral | Pergolas bioclimaticas premium en Cataluna',
+  description: 'Diseno e instalacion de pergolas bioclimaticas, toldos y cortinas de cristal en Cataluna: Barcelona, Girona, Tarragona y Lleida.',
+  keywords: 'pergolas bioclimaticas cataluna, pergolas bioclimaticas barcelona, pergolas girona, toldos barcelona, cortinas de cristal cataluna, pergolas premium',
+  image: `${SITE_URL}/images/pergola_bioclimatica_p_190_principal.jpg`,
+};
+
+const seoByRoute = {
+  '/': {
+    title: 'Umbral | Pergolas bioclimaticas premium en Cataluna',
+    description: 'Umbral disena e instala pergolas bioclimaticas, toldos y cortinas de cristal en Barcelona, Girona y toda Cataluna.',
+    keywords: 'pergolas bioclimaticas cataluna, pergolas barcelona, pergolas girona, toldos cataluna, cortinas de cristal barcelona',
+  },
+  '/productos': {
+    title: 'Productos Umbral | Pergolas, Toldos y Cortinas de Cristal',
+    description: 'Catalogo premium de soluciones exteriores en Cataluna: pergolas bioclimaticas, toldos y cortinas de cristal para residencial y contract.',
+    keywords: 'productos pergolas bioclimaticas, toldos premium, cortinas de cristal cataluna, pergolas barcelona girona',
+  },
+  '/proyectos': {
+    title: 'Proyectos Umbral en Cataluna | Barcelona y Girona',
+    description: 'Descubre proyectos reales de pergolas bioclimaticas y cerramientos exteriores ejecutados por Umbral en Cataluna.',
+    keywords: 'proyectos pergolas cataluna, pergolas barcelona, pergolas girona, proyectos exteriores premium',
+  },
+  '/empresa': {
+    title: 'Empresa Umbral | Especialistas en Exterior Premium en Cataluna',
+    description: 'Conoce Umbral, especialistas en diseno e instalacion de soluciones exteriores premium en Barcelona, Girona y toda Cataluna.',
+    keywords: 'empresa pergolas cataluna, instaladores pergolas barcelona, expertos toldos girona',
+  },
+  '/contacto': {
+    title: 'Contacto Umbral | Presupuesto en Cataluna',
+    description: 'Solicita presupuesto para pergolas bioclimaticas, toldos y cortinas de cristal en Barcelona, Girona, Tarragona y Lleida.',
+    keywords: 'presupuesto pergolas barcelona, contacto pergolas girona, toldos tarragona, cortinas de cristal lleida',
+  },
+  '/productos/toldos': {
+    title: 'Toldos Premium en Cataluna | Umbral',
+    description: 'Toldos premium para terrazas y porches en Barcelona, Girona y toda Cataluna. Soluciones a medida con instalacion profesional.',
+    keywords: 'toldos barcelona, toldos girona, toldos premium cataluna, instalacion toldos',
+  },
+};
+
+if (product) {
+  seoByRoute[normalizedPath] = {
+    title: `${product.title} | Umbral Cataluna`,
+    description: `${product.title} de Umbral: diseno e instalacion en Barcelona, Girona y Cataluna con acabados premium para exterior.`,
+    keywords: `${product.title.toLowerCase()}, ${product.title.toLowerCase()} barcelona, ${product.title.toLowerCase()} girona, ${product.title.toLowerCase()} cataluna`,
+    image: `${SITE_URL}${product.image}`,
+  };
+}
+
+if (toldoModel) {
+  seoByRoute[normalizedPath] = {
+    title: `${toldoModel.title} | Umbral Cataluna`,
+    description: `${toldoModel.title} de Umbral para proyectos en Barcelona, Girona y Cataluna con instalacion profesional y enfoque premium.`,
+    keywords: `${toldoModel.title.toLowerCase()}, ${toldoModel.title.toLowerCase()} barcelona, ${toldoModel.title.toLowerCase()} girona, toldos cataluna`,
+    image: `${SITE_URL}${toldoModel.image}`,
+  };
+}
+
+const pageSeo = seoByRoute[normalizedPath] || defaultSeo;
+
+const setMetaTag = (selector, attribute, content) => {
+  let tag = document.head.querySelector(selector);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute(attribute, selector.includes('property=') ? selector.match(/property="([^"]+)"/)[1] : selector.match(/name="([^"]+)"/)[1]);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', content);
+};
+
+const applySeo = () => {
+  const canonicalUrl = `${SITE_URL}${normalizedPath === '/' ? '/' : normalizedPath}`;
+  document.title = pageSeo.title;
+
+  setMetaTag('meta[name="description"]', 'name', pageSeo.description);
+  setMetaTag('meta[name="keywords"]', 'name', pageSeo.keywords);
+  setMetaTag('meta[property="og:title"]', 'property', pageSeo.title);
+  setMetaTag('meta[property="og:description"]', 'property', pageSeo.description);
+  setMetaTag('meta[property="og:url"]', 'property', canonicalUrl);
+  setMetaTag('meta[property="og:image"]', 'property', pageSeo.image || defaultSeo.image);
+  setMetaTag('meta[name="twitter:title"]', 'name', pageSeo.title);
+  setMetaTag('meta[name="twitter:description"]', 'name', pageSeo.description);
+  setMetaTag('meta[name="twitter:image"]', 'name', pageSeo.image || defaultSeo.image);
+
+  let canonical = document.head.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', canonicalUrl);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Umbral',
+    url: SITE_URL,
+    description: pageSeo.description,
+    areaServed: [
+      { '@type': 'AdministrativeArea', name: 'Cataluna' },
+      { '@type': 'City', name: 'Barcelona' },
+      { '@type': 'City', name: 'Girona' },
+      { '@type': 'City', name: 'Tarragona' },
+      { '@type': 'City', name: 'Lleida' },
+    ],
+    sameAs: ['https://www.instagram.com/umbral_premium'],
+  };
+
+  const schemaTag = document.getElementById('seo-localbusiness-jsonld');
+  if (schemaTag) {
+    schemaTag.textContent = JSON.stringify(jsonLd);
+  }
+};
+
+applySeo();
 
 initAnalytics();
 persistAttributionFromUrl();
