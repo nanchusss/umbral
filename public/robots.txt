@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
-Sitemap: https://umbral.premium/sitemap.xml
+Sitemap: https://www.umbral-premium.com/sitemap.xml

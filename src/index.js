@@ -17,7 +17,7 @@ import { initAnalytics } from './analytics';
 import reportWebVitals from './reportWebVitals';
 
 const path = window.location.pathname;
-const SITE_URL = 'https://umbral.premium';
+const SITE_URL = 'https://www.umbral-premium.com';
 const normalizedPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
 const isModelPage = path.startsWith('/modelo/') || path === '/modelo' || path.includes('/cadaques-p-190');
 const isProductsPage = path.includes('/productos');
