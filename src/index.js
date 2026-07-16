@@ -8,6 +8,7 @@ import ProjectsPage from './ProjectsPage';
 import ContactPage from './ContactPage';
 import CompanyPage from './CompanyPage';
 import CityLandingPage from './CityLandingPage';
+import ProductCityLandingPage from './ProductCityLandingPage';
 import ProductDetailPage from './ProductDetailPage';
 import ToldosPage from './ToldosPage';
 import ToldoModelPage from './ToldoModelPage';
@@ -27,6 +28,7 @@ const isToldosLanding = path === '/productos/toldos' || path === '/productos/tol
 
 const cityPages = {
   '/barcelona': {
+    slug: '/barcelona',
     name: 'Barcelona',
     eyebrow: 'Umbral Barcelona',
     h1: 'Pergolas bioclimaticas en Barcelona con instalacion premium.',
@@ -39,6 +41,7 @@ const cityPages = {
     ],
   },
   '/girona': {
+    slug: '/girona',
     name: 'Girona',
     eyebrow: 'Umbral Girona',
     h1: 'Pergolas bioclimaticas en Girona para exteriores de alto valor.',
@@ -51,6 +54,7 @@ const cityPages = {
     ],
   },
   '/tarragona': {
+    slug: '/tarragona',
     name: 'Tarragona',
     eyebrow: 'Umbral Tarragona',
     h1: 'Pergolas bioclimaticas en Tarragona con enfoque tecnico y estetico.',
@@ -63,6 +67,7 @@ const cityPages = {
     ],
   },
   '/lleida': {
+    slug: '/lleida',
     name: 'Lleida',
     eyebrow: 'Umbral Lleida',
     h1: 'Pergolas bioclimaticas en Lleida para confort exterior durante todo el ano.',
@@ -75,6 +80,55 @@ const cityPages = {
     ],
   },
 };
+
+const localServices = {
+  'pergolas-bioclimaticas': {
+    serviceName: 'Pergolas bioclimaticas',
+    productPath: '/productos/pergolas-bioclimaticas',
+    highlights: [
+      { title: 'Control solar avanzado', text: 'Lamas orientables para regular luz, ventilacion y confort segun cada momento.' },
+      { title: 'Diseno premium', text: 'Integracion arquitectonica limpia para viviendas y proyectos profesionales.' },
+      { title: 'Instalacion profesional', text: 'Ejecucion cuidada con seguimiento tecnico y acabados de alto nivel.' },
+    ],
+  },
+  'toldos': {
+    serviceName: 'Toldos',
+    productPath: '/productos/toldos',
+    highlights: [
+      { title: 'Sombra adaptable', text: 'Sistemas de extension y recogida para adaptar el espacio exterior al uso real.' },
+      { title: 'Modelos premium', text: 'Colecciones Maresme y Girona para residencial, hosteleria y contract.' },
+      { title: 'Durabilidad exterior', text: 'Materiales y mecanicas pensadas para uso intensivo y larga vida util.' },
+    ],
+  },
+  'cortinas-de-cristal': {
+    serviceName: 'Cortinas de cristal',
+    productPath: '/productos/cortinas-de-cristal',
+    highlights: [
+      { title: 'Transparencia y proteccion', text: 'Cerramientos ligeros para ampliar uso del exterior sin perder entrada de luz.' },
+      { title: 'Confort todo el ano', text: 'Mejora de aislamiento y control del viento para terrazas y porches.' },
+      { title: 'Acabado elegante', text: 'Lineas sobrias y soluciones tecnicas con foco en estetica contemporanea.' },
+    ],
+  },
+};
+
+const cityProductPages = Object.entries(cityPages).reduce((acc, [cityPath, city]) => {
+  Object.entries(localServices).forEach(([serviceSlug, service]) => {
+    const route = `${cityPath}/${serviceSlug}`;
+    acc[route] = {
+      cityPath,
+      cityName: city.name,
+      serviceSlug,
+      serviceName: service.serviceName,
+      productPath: service.productPath,
+      eyebrow: `Umbral ${city.name}`,
+      h1: `${service.serviceName} en ${city.name} con instalacion premium.`,
+      intro: `Diseno e instalacion de ${service.serviceName.toLowerCase()} en ${city.name} para viviendas, terrazas, jardines y espacios profesionales.`,
+      areas: city.areas,
+      highlights: service.highlights,
+    };
+  });
+  return acc;
+}, {});
 
 const productPages = {
   '/productos/pergolas-bioclimaticas': {
@@ -367,7 +421,8 @@ const toldoModelPages = {
 const product = productPages[path];
 const toldoModel = toldoModelPages[path];
 const cityPage = cityPages[normalizedPath];
-const renderedPage = isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : cityPage ? <CityLandingPage city={cityPage} /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
+const cityProductPage = cityProductPages[normalizedPath];
+const renderedPage = isModelPage ? <ModelPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : cityProductPage ? <ProductCityLandingPage page={cityProductPage} /> : cityPage ? <CityLandingPage city={cityPage} /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
 
 const defaultSeo = {
   title: 'Umbral | Pergolas bioclimaticas premium en Cataluna',
@@ -446,6 +501,14 @@ if (toldoModel) {
     image: `${SITE_URL}${toldoModel.image}`,
   };
 }
+
+Object.entries(cityProductPages).forEach(([route, page]) => {
+  seoByRoute[route] = {
+    title: `${page.serviceName} en ${page.cityName} | Umbral`,
+    description: `Diseno e instalacion de ${page.serviceName.toLowerCase()} en ${page.cityName}. Soluciones premium para residencial y contract en Cataluna.`,
+    keywords: `${page.serviceName.toLowerCase()} ${page.cityName.toLowerCase()}, ${page.serviceName.toLowerCase()} cataluna, ${page.cityName.toLowerCase()} exterior premium`,
+  };
+});
 
 const pageSeo = seoByRoute[normalizedPath] || defaultSeo;
 

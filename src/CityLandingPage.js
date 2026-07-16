@@ -51,6 +51,19 @@ function CityLandingPage({ city }) {
           </ul>
         </section>
 
+        <section className="editorial-section" aria-label={`Servicios por ciudad en ${city.name}`}>
+          <div className="section-heading">
+            <p className="eyebrow">Servicios por ciudad</p>
+            <h3>Paginas especificas para {city.name}.</h3>
+          </div>
+
+          <ul className="company-presence-list" aria-label={`Paginas de servicio en ${city.name}`}>
+            <li><a href={`${city.slug}/pergolas-bioclimaticas`}>Pergolas bioclimaticas en {city.name}</a></li>
+            <li><a href={`${city.slug}/toldos`}>Toldos en {city.name}</a></li>
+            <li><a href={`${city.slug}/cortinas-de-cristal`}>Cortinas de cristal en {city.name}</a></li>
+          </ul>
+        </section>
+
         <section className="products-bottom-cta" aria-label={`Solicitud de presupuesto en ${city.name}`}>
           <h3>Solicita presupuesto en {city.name} y recibe una propuesta adaptada a tu espacio.</h3>
           <a className="text-link" href="/contacto">Hablar con Umbral</a>
