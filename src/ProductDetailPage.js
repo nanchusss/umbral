@@ -8,11 +8,12 @@ function ProductDetailPage({ product }) {
   const currentPath = window.location.pathname;
   const normalizedPath = currentPath.endsWith('/') && currentPath !== '/' ? currentPath.slice(0, -1) : currentPath;
   const isMaresmeCollectionPage = normalizedPath === '/productos/toldos/maresme';
+  const isCristalCollectionPage = normalizedPath === '/productos/cortinas-de-cristal';
   const breadcrumbTrail =
-    currentPath === '/productos/toldos/maresme' || currentPath === '/productos/toldos/girona'
+    currentPath === '/productos/toldos/maresme' || currentPath === '/productos/toldos/girona' || currentPath === '/productos/cortinas-de-cristal'
       ? [
           { label: 'Productos', href: '/productos' },
-          { label: 'Toldos', href: '/productos/toldos' },
+          { label: isCristalCollectionPage ? 'Cortinas de cristal' : 'Toldos', href: isCristalCollectionPage ? '/productos/cortinas-de-cristal' : '/productos/toldos' },
           { label: product.collectionName || product.title },
         ]
       : [
@@ -104,10 +105,9 @@ function ProductDetailPage({ product }) {
             <video
               className="product-detail-video"
               src={product.heroVideo}
-              autoPlay
               muted
-              loop
               playsInline
+              preload="metadata"
               controls
               poster={product.image}
             />
@@ -151,7 +151,7 @@ function ProductDetailPage({ product }) {
 
         {isMaresmeCollectionPage && product.scrollVideo && (
           <section className="product-video-section" aria-label="Video de la coleccion Maresme">
-            <video className="product-detail-video" src={product.scrollVideo} autoPlay muted loop playsInline controls poster={product.image} />
+            <video className="product-detail-video" src={product.scrollVideo} muted playsInline preload="metadata" controls poster={product.image} />
             <div className="product-video-badge">
               <p>Video de la coleccion Maresme</p>
             </div>

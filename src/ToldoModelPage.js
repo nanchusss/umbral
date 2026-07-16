@@ -64,7 +64,7 @@ function ToldoModelPage({ model }) {
           {galleryImages.map((image, index) => (
             <article className="toldo-model-gallery-card" key={`${model.title}-${image}`}>
               {isVideoFile(image) ? (
-                <video src={image} autoPlay muted loop playsInline controls aria-label={`${model.title} video ${index + 1}`} />
+                <video src={image} playsInline preload="metadata" controls aria-label={`${model.title} video ${index + 1}`} />
               ) : (
                 <img src={image} alt={`${model.title} foto ${index + 1}`} />
               )}

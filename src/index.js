@@ -157,21 +157,52 @@ const productPages = {
   '/productos/cortinas-de-cristal': {
     title: 'Cortinas de cristal',
     intro: 'Transparencia, protección y un acabado refinado para espacios contemporáneos.',
-    image: '/images/pergola_bioclimatica_p_190_principal.jpg',
-    description: 'Las cortinas de cristal de Umbral abren la arquitectura al exterior sin renunciar al confort, el control y la elegancia.',
+    image: '/images/cortinacristal_saxun_paisaje.png',
+    description: 'Umbral diseña cortinas de cristal que abren la arquitectura al exterior sin renunciar al confort, el control y la elegancia. Para esta colección trabajamos con el sistema corredero Saxun Iras, un proveedor líder en Europa, que permite dividir espacios de forma moderna, luminosa y silenciosa.',
     features: ['Transparencia total', 'Protección climática', 'Acabados premium'],
     collectionName: 'Mediterráneo',
-    collectionItems: [
-      { eyebrow: 'Colección', title: 'Línea Panorama', href: '/contacto', cta: 'Solicitar información' },
-      { eyebrow: 'Colección', title: 'Línea Horizon', href: '/contacto', cta: 'Solicitar información' },
+    collectionGroups: [
+      {
+        title: 'Colección Mediterráneo',
+        subgroups: [
+          {
+            title: 'Cortina de cristal corredera',
+            items: [
+              { eyebrow: 'Sistema Saxun', title: 'Iras', href: '/productos/cortinas-de-cristal/modelos/iras', cta: 'Ver sistema' },
+              { eyebrow: 'Solución Saxun', title: 'Azur', href: '/productos/cortinas-de-cristal/modelos/azur', cta: 'Ver sistema' },
+              { eyebrow: 'Uso contract', title: 'Vallès Horeca', href: '/productos/cortinas-de-cristal/modelos/valles-horeca', cta: 'Ver sistema' },
+            ],
+          },
+        ],
+      },
     ],
-    spotlightImage: '/images/cortinas_cristal_2.jpg',
-    spotlightAlt: 'Cortinas de cristal Umbral',
-    spotlightEyebrow: 'Propuesta Umbral',
-    spotlightTitle: 'Un cerramiento ligero para abrir el espacio al exterior.',
-    spotlightText: 'Diseñadas para disfrutar vistas y luminosidad sin renunciar a protección climática y confort durante todo el año.',
-    benefitsTitle: 'Por qué elegir Umbral',
-    benefitsSubtitle: 'Transparencia, protección y detalle técnico.',
+    spotlightImage: '/images/cortinacristal1.png',
+    spotlightAlt: 'Cortina de cristal corredera Saxun',
+    spotlightEyebrow: 'Umbral · Sistema corredero Saxun',
+    spotlightTitle: 'Una solución innovadora, luminosa y versátil diseñada por Umbral.',
+    spotlightText: 'Permite disponer de un espacio de trabajo flexible, dejar entrar la luz natural y crear ambientes saludables y sostenibles sin alterar la estética del conjunto.',
+    benefitsTitle: 'Colección Mediterráneo',
+    benefitsSubtitle: 'Sistemas correderos de cristal pensados para residencias, oficinas y hostelería.',
+    showcaseCards: [
+      {
+        image: '/images/cortina_cristal_iras_r_t7a9754.jpg',
+        alt: 'Interior con paisaje a través de cortina de cristal',
+        title: 'Interior con paisaje',
+        text: 'Una escena donde Umbral convierte el interior en un espacio abierto al paisaje sin perder confort ni control visual.',
+      },
+      {
+        image: '/images/cortina_cristal_iras_r_t7a9784(1).jpg',
+        alt: 'Cortina de cristal corredera Iras',
+        title: 'Iras',
+        text: 'El sistema Saxun Iras, integrado por Umbral, ofrece un deslizamiento moderno, silencioso y pensado para dividir espacios con limpieza visual.',
+      },
+      {
+        image: '/images/cortinacristal_horeca_azur_st_post_1.jpg',
+        alt: 'Cortina de cristal para horeca',
+        title: 'Aplicación Horeca',
+        text: 'Integración perfecta en fachadas acristaladas y pérgolas bioclimáticas dentro de proyectos Umbral.',
+      },
+    ],
   },
 };
 
@@ -247,6 +278,33 @@ const toldoModelPages = {
     description: 'Neo combina prestaciones de cerramiento lateral con una expresion estetica mas depurada.',
     features: ['Diseno actual', 'Proteccion y privacidad', 'Ideal para arquitectura exterior de alto nivel'],
     gallery: ['/images/ws_neo_web_1.png', '/images/ws_compact_principal.png', '/images/previa_4_wind_screen_vista_general_copia.jpg'],
+  },
+  '/productos/cortinas-de-cristal/modelos/iras': {
+    title: 'Iras',
+    collection: 'Colección Vallès · Cortina de cristal corredera',
+    intro: 'Sistema corredero desarrollado por Umbral con tecnología Saxun para transformar espacios con luz, transparencia y movimiento silencioso.',
+    image: '/images/cortina_cristal_iras_r_t7a9754.jpg',
+    description: 'Iras permite desplazar hojas de vidrio de forma paralela hacia uno o ambos lados, creando divisiones modernas y luminosas para viviendas, oficinas y hostelería. Umbral integra esta solución para adaptarla a cada proyecto.',
+    features: ['Movimiento corredero suave', 'Integración arquitectónica limpia', 'Ideal para interior y exterior'],
+    gallery: ['/images/cortina_cristal_iras_r_t7a9754.jpg', '/images/cortina_cristal_iras_r_t7a9784(1).jpg', '/images/cortina_cristal_iras_r_t7a9786_1.jpg'],
+  },
+  '/productos/cortinas-de-cristal/modelos/azur': {
+    title: 'Azur',
+    collection: 'Colección Vallès · Cortina de cristal abatible',
+    intro: 'Solución de vidrio para balcones, terrazas y porches con una presencia elegante y ligera.',
+    image: '/images/cortinacristal1.png',
+    description: 'Azur aporta flexibilidad espacial y control visual con un lenguaje limpio y contemporáneo, siempre bajo la propuesta de Umbral.',
+    features: ['Apertura cómoda', 'Mayor flexibilidad de uso', 'Acabado sobrio y luminoso'],
+    gallery: ['/images/cortinacristal1.png', '/images/cortinacristal2.jpg', '/images/cortinacristal_saxun_paisaje.png'],
+  },
+  '/productos/cortinas-de-cristal/modelos/valles-horeca': {
+    title: 'Vallès Horeca',
+    collection: 'Colección Vallès · Aplicación Horeca',
+    intro: 'Propuesta para restaurantes, hoteles y espacios contract que buscan un cerramiento versátil y saludable.',
+    image: '/images/cortinacristal_horeca_azur_st_post_1.jpg',
+    description: 'Una solución pensada por Umbral para dejar entrar la luz natural, mantener confort térmico y ofrecer múltiples usos a un espacio de trabajo o encuentro.',
+    features: ['Espacios saludables', 'Uso contract', 'Máximo aprovechamiento de la luz natural'],
+    gallery: ['/images/cortinacristal_horeca_azur_st_post_1.jpg', '/images/cortinacristal_saxun_paisaje.png', '/images/cortina_cristal_iras_r_t7a9754.jpg'],
   },
 };
 

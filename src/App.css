@@ -95,10 +95,63 @@ img {
 .nav-link-button {
   background: transparent;
   border: none;
-  padding: 0;
+  padding: 0 0 6px;
   font: inherit;
   color: inherit;
   cursor: pointer;
+}
+
+.desktop-nav-items .nav-link-button,
+.nav-links > a:not(.mobile-only-nav-link) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding: 0 0 6px;
+}
+
+.desktop-nav-items .nav-link-button::before,
+.nav-links > a:not(.mobile-only-nav-link)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0.72;
+  transition: transform 220ms ease;
+}
+
+.desktop-nav-items .nav-link-button::after,
+.nav-links > a:not(.mobile-only-nav-link)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 999px;
+  transform: translateX(-50%) scale(0);
+  opacity: 0.75;
+  transition: transform 220ms ease;
+}
+
+.desktop-nav-items .nav-link-button:hover::before,
+.desktop-nav-items .nav-link-button:focus-visible::before,
+.nav-links > a:not(.mobile-only-nav-link):hover::before,
+.nav-links > a:not(.mobile-only-nav-link):focus-visible::before {
+  transform: scaleX(1);
+}
+
+.desktop-nav-items .nav-link-button:hover::after,
+.desktop-nav-items .nav-link-button:focus-visible::after,
+.nav-links > a:not(.mobile-only-nav-link):hover::after,
+.nav-links > a:not(.mobile-only-nav-link):focus-visible::after {
+  transform: translateX(-50%) scale(1);
 }
 
 .products-menu {
@@ -337,6 +390,124 @@ img {
 .company-universe-tabs span:first-child {
   background: #12181c;
   color: #f5f3ec;
+}
+
+.company-ethics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.company-ethic-card {
+  padding: 16px;
+  border: 1px solid rgba(111, 90, 60, 0.14);
+  background: rgba(255, 255, 255, 0.68);
+  display: grid;
+  gap: 8px;
+}
+
+.company-ethic-card h4 {
+  margin: 0;
+  color: #273338;
+  font-size: 1.05rem;
+}
+
+.company-ethic-card p {
+  margin: 0;
+  color: #4f5962;
+  line-height: 1.62;
+}
+
+.company-presence-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.company-catalonia-map {
+  position: relative;
+  min-height: 270px;
+  background: linear-gradient(135deg, rgba(223, 216, 201, 0.55), rgba(227, 233, 225, 0.72));
+  border: 1px solid rgba(111, 90, 60, 0.14);
+  overflow: hidden;
+}
+
+.company-catalonia-map::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(72%, 340px);
+  aspect-ratio: 0.92;
+  transform: translate(-50%, -50%);
+  background: rgba(61, 81, 88, 0.24);
+  clip-path: polygon(29% 2%, 63% 8%, 79% 20%, 90% 33%, 85% 51%, 93% 67%, 78% 86%, 59% 95%, 43% 88%, 22% 96%, 9% 80%, 13% 62%, 5% 47%, 14% 33%, 11% 18%);
+}
+
+.map-point {
+  position: absolute;
+  padding-left: 12px;
+  font-size: 0.82rem;
+  color: #2e434c;
+  font-weight: 600;
+}
+
+.map-point::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: #2f4652;
+}
+
+.map-point.barcelona {
+  left: 60%;
+  top: 56%;
+}
+
+.map-point.girona {
+  left: 64%;
+  top: 32%;
+}
+
+.map-point.lleida {
+  left: 29%;
+  top: 42%;
+}
+
+.map-point.tarragona {
+  left: 49%;
+  top: 72%;
+}
+
+.company-presence-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.company-presence-list li {
+  padding: 10px 12px;
+  border: 1px solid rgba(111, 90, 60, 0.14);
+  background: rgba(255, 255, 255, 0.64);
+  color: #3a4850;
+}
+
+@media (min-width: 900px) {
+  .company-ethics-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .company-presence-layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
 }
 
 .hero-image-panel {
@@ -792,6 +963,74 @@ img {
   align-items: center;
 }
 
+.footer-extended {
+  display: block;
+  max-width: 1380px;
+  padding: 26px 24px 28px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.footer-brand-block {
+  display: grid;
+  gap: 12px;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-brand-logo {
+  height: 46px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-column {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.footer-column h4 {
+  margin: 0 0 2px;
+  color: #2c3a41;
+  font-size: 1rem;
+}
+
+.footer-column a {
+  color: #46535a;
+  text-decoration: none;
+}
+
+.footer-bottom-row {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(111, 90, 60, 0.14);
+}
+
+.footer-bottom-row p {
+  margin: 0;
+  color: #59646d;
+  font-size: 0.9rem;
+}
+
+.footer-extended .footer-mail-icon {
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  gap: 8px;
+  border: 1px solid rgba(111, 90, 60, 0.25);
+  text-decoration: none;
+  color: #2f4652;
+}
+
 .footer-mail-icon {
   width: 34px;
   height: 34px;
@@ -879,6 +1118,17 @@ img {
     display: block;
     padding: 12px 4px;
     border-bottom: 1px solid rgba(111, 90, 60, 0.1);
+  }
+
+  .nav-link-button {
+    padding: 0;
+  }
+
+  .desktop-nav-items .nav-link-button::before,
+  .desktop-nav-items .nav-link-button::after,
+  .nav-links > a:not(.mobile-only-nav-link)::before,
+  .nav-links > a:not(.mobile-only-nav-link)::after {
+    content: none;
   }
 
   .nav-links > a:last-child {
@@ -991,8 +1241,33 @@ img {
     gap: 8px;
   }
 
+  .footer-grid {
+    gap: 16px;
+  }
+
+  .footer-column {
+    border-top: 1px solid rgba(111, 90, 60, 0.12);
+    padding-top: 12px;
+  }
+
+  .footer-column h4 {
+    font-size: 0.98rem;
+  }
+
   .footer-links-group {
     gap: 10px;
+  }
+}
+
+@media (min-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1.1fr 1fr 1fr 1fr;
+    gap: 26px;
+  }
+
+  .footer-column {
+    border-top: none;
+    padding-top: 0;
   }
 }
 
@@ -2489,5 +2764,19 @@ img {
 
   .model-page .model-visual-card img {
     max-height: 280px;
+  }
+}
+
+.footer.footer-extended {
+  display: block;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 26px 24px 28px;
+  border-top: 1px solid rgba(111, 90, 60, 0.16);
+}
+
+@media (max-width: 860px) {
+  .footer.footer-extended {
+    padding: 20px 16px 24px;
   }
 }

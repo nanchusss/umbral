@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { FiSun, FiShield, FiLayers, FiArrowRight } from 'react-icons/fi';
 import './App.css';
 import FloatingWhatsAppButton from './FloatingWhatsAppButton';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
+import { EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_TO_EMAIL } from './emailjsConfig';
 
 function App() {
   const [formData, setFormData] = useState({ nombre: '', email: '', telefono: '' });
@@ -46,24 +48,21 @@ function App() {
     setSubmitState('sending');
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/nanchusss@icloud.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.nombre,
+          reply_to: formData.email,
+          recipient_email: EMAILJS_TO_EMAIL,
+          phone: formData.telefono,
+          product_interest: 'Home',
+          message: 'Solicitud enviada desde el formulario del Home.',
+          website: 'Umbral',
+          subject: 'Solicitud de presupuesto Umbral',
         },
-        body: JSON.stringify({
-          nombre: formData.nombre,
-          email: formData.email,
-          telefono: formData.telefono,
-          _subject: 'Solicitud de presupuesto Umbral',
-          _template: 'table',
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('No se pudo enviar la solicitud.');
-      }
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
 
       setFormData({ nombre: '', email: '', telefono: '' });
       setSubmitState('success');
@@ -80,7 +79,7 @@ function App() {
             {heroSlides.map((slide, index) => (
               <div key={slide.src} className={`hero-media-slide ${activeHeroSlide === index ? 'is-active' : ''}`}>
                 {slide.type === 'video' ? (
-                  <video src={slide.src} autoPlay muted loop playsInline preload="metadata" aria-label={slide.label} />
+                  <video src={slide.src} autoPlay muted loop playsInline preload="metadata" poster="/images/pergola_bioclimatica_p_190_principal.jpg" aria-label={slide.label} />
                 ) : (
                   <img src={slide.src} alt={slide.label} loading="eager" />
                 )}

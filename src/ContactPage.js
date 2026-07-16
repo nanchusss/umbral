@@ -5,6 +5,7 @@ import './App.css';
 import FloatingWhatsAppButton from './FloatingWhatsAppButton';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
+import { EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_TO_EMAIL } from './emailjsConfig';
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -84,30 +85,22 @@ function ContactPage() {
       return;
     }
 
-    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      setSubmitState('config-error');
-      return;
-    }
-
     setSubmitState('sending');
 
     try {
       await emailjs.send(
-        serviceId,
-        templateId,
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         {
           from_name: formData.nombre,
-          from_email: formData.email,
+          reply_to: formData.email,
+          recipient_email: EMAILJS_TO_EMAIL,
           phone: formData.telefono,
           product_interest: formData.producto,
           message: formData.mensaje,
           website: 'Umbral',
         },
-        { publicKey }
+        EMAILJS_PUBLIC_KEY
       );
 
       setFormData({
@@ -152,7 +145,7 @@ function ContactPage() {
               </article>
             </div>
 
-            <a className="text-link" href="https://wa.me/34683704011?text=Hola%2C%20quiero%20informacion%20sobre%20un%20proyecto%20con%20Umbral" target="_blank" rel="noreferrer">
+            <a className="text-link" href="https://wa.me/34691292245?text=Hola%2C%20os%20escribo%20desde%20la%20pagina%20web%20de%20Umbral.%20Me%20gustaria%20recibir%20informacion%20sobre%20vuestras%20soluciones." target="_blank" rel="noreferrer">
               Hablar por WhatsApp
             </a>
           </div>
@@ -244,9 +237,6 @@ function ContactPage() {
               {submitState === 'success' && <p className="form-success">Mensaje enviado. Te contactaremos muy pronto.</p>}
               {submitState === 'error' && <p className="form-success form-error">No se pudo enviar. Intentalo de nuevo.</p>}
               {submitState === 'invalid' && <p className="form-success form-error">Revisa los campos marcados antes de enviar.</p>}
-              {submitState === 'config-error' && (
-                <p className="form-success form-error">Falta configurar EmailJS (service, template y public key).</p>
-              )}
             </form>
           </div>
         </div>

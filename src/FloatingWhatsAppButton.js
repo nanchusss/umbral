@@ -1,7 +1,7 @@
 import { FaWhatsapp } from 'react-icons/fa';
 
-const whatsappNumber = '34683704011';
-const defaultMessage = encodeURIComponent('Hola, me gustaria recibir informacion sobre las soluciones de Umbral.');
+const whatsappNumber = '34691292245';
+const defaultMessage = encodeURIComponent('Hola, os escribo desde la pagina web de Umbral. Me gustaria recibir informacion sobre vuestras soluciones.');
 
 function FloatingWhatsAppButton() {
   return (

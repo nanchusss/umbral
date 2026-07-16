@@ -9,7 +9,7 @@ const productHighlights = [
 
 const companyHighlights = [
   { title: 'Sobre nosotros', slug: '/empresa', description: 'Conoce la vision y cultura de Umbral.', icon: <FiHome size={26} /> },
-  { title: 'Canal etico', slug: '/contacto', description: 'Comunicacion segura y responsable.', icon: <FiShield size={26} /> },
+  { title: 'Canal etico', slug: '/empresa#canal-etico', description: 'Valores, integridad y compromiso responsable.', icon: <FiShield size={26} /> },
   { title: 'Comunicacion', slug: '/contacto', description: 'Prensa y canales de contacto.', icon: <FiMessageSquare size={26} /> },
 ];
 
