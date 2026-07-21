@@ -9,10 +9,10 @@ function AdminPage() {
     <div className="app-shell page-shell admin-page-shell">
       <SiteHeader links={[{ label: 'Contacto', href: '/contacto' }]}> 
         <div className="page-intro admin-page-intro">
-          <p className="eyebrow">Empresa · Area privada</p>
-          <h1>Area privada para administradores Umbral.</h1>
+          <p className="eyebrow">Empresa · Área privada</p>
+          <h1>Área privada para administradores Umbral.</h1>
           <p className="hero-text">
-            Desde esta pagina privada puedes iniciar sesion y generar fichas de cliente en PDF con la identidad visual de Umbral.
+            Desde esta página privada puedes iniciar sesión y generar fichas de cliente en PDF con la identidad visual de Umbral.
           </p>
         </div>
       </SiteHeader>
@@ -23,7 +23,7 @@ function AdminPage() {
 
       <FloatingWhatsAppButton />
 
-      <SiteFooter label="Umbral · Area privada" />
+      <SiteFooter label="Umbral · Área privada" />
     </div>
   );
 }
