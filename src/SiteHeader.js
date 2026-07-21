@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiShield, FiMessageSquare, FiHome, FiMenu, FiX } from 'react-icons/fi';
+import { FiShield, FiMessageSquare, FiHome, FiMenu, FiX, FiLock } from 'react-icons/fi';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const productHighlights = [
@@ -12,6 +12,12 @@ const companyHighlights = [
   { title: 'Sobre nosotros', slug: '/empresa', description: 'Conoce la vision y cultura de Umbral.', icon: <FiHome size={26} /> },
   { title: 'Canal etico', slug: '/empresa#canal-etico', description: 'Valores, integridad y compromiso responsable.', icon: <FiShield size={26} /> },
   { title: 'Comunicacion', slug: '/contacto', description: 'Prensa y canales de contacto.', icon: <FiMessageSquare size={26} /> },
+  {
+    title: 'Area privada',
+    slug: '/empresa/admin',
+    description: 'Acceso para administradores y generacion de PDF interno.',
+    icon: <FiLock size={26} />,
+  },
 ];
 
 function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) {
