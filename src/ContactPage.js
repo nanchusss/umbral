@@ -144,7 +144,7 @@ function ContactPage() {
 
   return (
     <div className="app-shell page-shell">
-      <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]} />
+      <SiteHeader />
 
       <main className="section contact-showcase">
         <h1>Haz de tu exterior el espacio que todos quieren disfrutar.</h1>

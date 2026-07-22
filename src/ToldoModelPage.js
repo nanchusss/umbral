@@ -22,7 +22,7 @@ function ToldoModelPage({ model }) {
 
   return (
     <div className="app-shell page-shell">
-      <SiteHeader links={[{ label: 'Toldos', href: '/productos/toldos' }, { label: 'Contacto', href: '/contacto' }]}>
+      <SiteHeader>
         <div className="page-intro">
           <nav className="page-breadcrumbs" aria-label="Ruta de navegacion">
             {breadcrumbTrail.map((item, index) => (

@@ -28,7 +28,7 @@ const featuredProducts = [
 function ProductsPage() {
   return (
     <div className="app-shell page-shell">
-      <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
+      <SiteHeader>
         <div className="page-intro">
           <p className="eyebrow">Productos</p>
           <h1>Soluciones premium para transformar cada exterior.</h1>

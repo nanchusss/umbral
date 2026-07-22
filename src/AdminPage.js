@@ -7,7 +7,7 @@ import AdminQuotePortal from './AdminQuotePortal';
 function AdminPage() {
   return (
     <div className="app-shell page-shell admin-page-shell">
-      <SiteHeader links={[{ label: 'Contacto', href: '/contacto' }]}> 
+      <SiteHeader>
         <div className="page-intro admin-page-intro">
           <p className="eyebrow">Empresa · Área privada</p>
           <h1>Área privada para administradores Umbral.</h1>

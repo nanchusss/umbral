@@ -84,7 +84,7 @@ const cataloniaPresence = [
 function CompanyPage() {
   return (
     <div className="app-shell page-shell">
-      <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }, { label: 'Area privada', href: '/empresa/admin' }]}>
+      <SiteHeader>
         <div className="page-intro">
           <p className="eyebrow">Empresa</p>
           <h1>Sobre nosotros: estrategia, diseno y ejecucion premium para exterior.</h1>

@@ -93,7 +93,7 @@ function App() {
 
   return (
     <div className="app-shell">
-      <SiteHeader heroClassName="hero editorial-hero" links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
+      <SiteHeader heroClassName="hero editorial-hero">
         <div className="hero-image-panel">
           <div className="hero-media-carousel" aria-label="Carrusel principal Umbral">
             {heroSlides.map((slide, index) => (
@@ -180,30 +180,30 @@ function App() {
           </div>
 
           <div className="image-showcase-grid">
-            <article className="image-card image-card-large">
-              <img src="/images/pergolas.jpg" alt="Pérgola bioclimática Umbral" />
+            <a className="image-card image-card-large image-card-link" href="/productos/pérgolas-bioclimáticas">
+              <img src="/images/pergolas.jpg" alt="Pérgolas bioclimáticas Umbral" />
               <div className="image-card-copy">
                 <h4>Pérgolas bioclimáticas</h4>
                 <p>Diseño mediterráneo, confort invisible y una presencia sobria.</p>
               </div>
-            </article>
+            </a>
 
             <div className="image-stack">
-              <article className="image-card">
-                <img src="/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9419.jpg" alt="Proyecto Umbral en Atico Campello" />
+              <a className="image-card image-card-link" href="/productos/cortinas-de-cristal">
+                <img src="/images/cortinacristal_saxun_paisaje.png" alt="Cortinas de cristal Umbral" />
                 <div className="image-card-copy">
-                  <h4>Exteriores singulares</h4>
-                  <p>Soluciones a medida para proyectos de alto nivel.</p>
+                  <h4>Cortinas de cristal</h4>
+                  <p>Transparencia, protección y continuidad visual para ampliar el exterior.</p>
                 </div>
-              </article>
+              </a>
 
-              <article className="image-card">
+              <a className="image-card image-card-link" href="/productos/toldos">
                 <img src="/images/toldos.jpg" alt="Toldos Umbral" />
                 <div className="image-card-copy">
-                  <h4>Toldos y cortinas de cristal</h4>
+                  <h4>Toldos</h4>
                   <p>Arquitectura y funcionalidad en equilibrio perfecto.</p>
                 </div>
-              </article>
+              </a>
             </div>
           </div>
         </section>
@@ -247,7 +247,7 @@ function App() {
                 {submitState === 'sending' ? 'Enviando...' : 'Enviar solicitud'}
               </button>
               {submitState === 'success' && <p className="form-success">Gracias. Tu solicitud fue enviada correctamente.</p>}
-              {submitState === 'error' && <p className="form-success form-error">No se pudo enviar. Intentalo de nuevo en unos segundos.</p>}
+              {submitState === 'error' && <p className="form-success form-error">No se pudo enviar. Inténtalo de nuevo en unos segundos.</p>}
             </form>
           </div>
         </section>

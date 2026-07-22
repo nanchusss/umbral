@@ -68,7 +68,7 @@ const isVideoFile = (path) => /\.(mp4|webm|mov)$/i.test(path);
 function ProjectsPage() {
   return (
     <div className="app-shell page-shell">
-      <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
+      <SiteHeader>
         <div className="page-intro">
           <p className="eyebrow">Proyectos</p>
           <h1>Intervenciones que elevan cada exterior.</h1>

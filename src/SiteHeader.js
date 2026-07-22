@@ -20,7 +20,7 @@ const companyHighlights = [
   },
 ];
 
-function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) {
+function SiteHeader({ heroClassName = 'hero page-hero', children }) {
   const [productsOpen, setProductsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
   const [companyOpen, setCompanyOpen] = useState(false);
@@ -53,10 +53,17 @@ function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) 
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  const desktopStaticLinks = [
+    { label: 'Proyectos', href: '/proyectos' },
+    { label: 'Contacto', href: '/contacto' },
+  ];
+
   const mobileMenuLinks = [
     { label: 'Productos', href: '/productos' },
     { label: 'Empresa', href: '/empresa' },
-    ...links,
+    { label: 'Proyectos', href: '/proyectos' },
+    { label: 'Contacto', href: '/contacto' },
+    { label: 'Area privada', href: '/empresa/admin' },
   ].filter((item, index, source) => source.findIndex((entry) => entry.href === item.href) === index);
 
   const toggleMobileMenu = () => {
@@ -116,7 +123,7 @@ function SiteHeader({ links = [], heroClassName = 'hero page-hero', children }) 
               </button>
             </div>
 
-            {links.map((item) => (
+            {desktopStaticLinks.map((item) => (
               <a key={`${item.href}-${item.label}`} className="desktop-nav-link" href={item.href} onClick={closeMobileMenu}>
                 {item.label}
               </a>

@@ -47,7 +47,7 @@ function ModelPage() {
 
   return (
     <div className="app-shell model-page">
-      <SiteHeader heroClassName="hero model-hero" links={[{ label: 'Detalles', href: '#detalles' }, { label: 'Contacto', href: '#contacto' }]}>
+      <SiteHeader heroClassName="hero model-hero">
         <div className="hero-grid model-grid">
           <div className="hero-copy">
             <p className="eyebrow">Modelo flagship · Cadaqués P-190</p>

@@ -36,7 +36,7 @@ const toldosCollections = [
 function ToldosPage() {
   return (
     <div className="app-shell page-shell">
-      <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
+      <SiteHeader>
         <div className="page-intro">
           <p className="eyebrow">Toldos</p>
           <h1>Soluciones de toldos por colecciones.</h1>

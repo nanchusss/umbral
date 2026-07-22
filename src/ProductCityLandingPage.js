@@ -6,7 +6,7 @@ import SiteFooter from './SiteFooter';
 function ProductCityLandingPage({ page }) {
   return (
     <div className="app-shell page-shell">
-      <SiteHeader links={[{ label: 'Proyectos', href: '/proyectos' }, { label: 'Contacto', href: '/contacto' }]}>
+      <SiteHeader>
         <div className="page-intro">
           <p className="eyebrow">{page.eyebrow}</p>
           <h1>{page.h1}</h1>
@@ -20,7 +20,7 @@ function ProductCityLandingPage({ page }) {
             <p className="eyebrow">Servicio local</p>
             <h3>{page.serviceName} para residencial y contract en {page.cityName}.</h3>
             <p>
-              Trabajamos con metodologia consultiva: visita tecnica, propuesta personalizada e instalacion profesional.
+              Trabajamos con metodología consultiva: visita técnica, propuesta personalizada e instalacion profesional.
             </p>
           </div>
 
