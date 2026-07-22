@@ -429,35 +429,41 @@ const cityProductPage = cityProductPages[normalizedPath];
 const renderedPage = isModelPage ? <ModelPage /> : isAdminPage ? <AdminPage /> : isCompanyPage ? <CompanyPage /> : isProjectsPage ? <ProjectsPage /> : isContactPage ? <ContactPage /> : isToldosLanding ? <ToldosPage /> : cityProductPage ? <ProductCityLandingPage page={cityProductPage} /> : cityPage ? <CityLandingPage city={cityPage} /> : toldoModel ? <ToldoModelPage model={toldoModel} /> : product ? <ProductDetailPage product={product} /> : isProductsPage ? <ProductsPage /> : <App />;
 
 const defaultSeo = {
-  title: 'Umbral | Pergolas bioclimaticas premium en Cataluna',
-  description: 'Diseno e instalacion de pergolas bioclimaticas, toldos y cortinas de cristal en Cataluna: Barcelona, Girona, Tarragona y Lleida.',
-  keywords: 'pergolas bioclimaticas cataluna, pergolas bioclimaticas barcelona, pergolas girona, toldos barcelona, cortinas de cristal cataluna, pergolas premium',
+  title: 'Umbral | Pérgolas bioclimáticas en Barcelona y Cataluña',
+  description: 'Diseño e instalación de pérgolas bioclimáticas, toldos y cortinas de cristal en Cataluña: Barcelona, Girona, Tarragona y Lleida.',
+  keywords: 'umbral pergolas barcelona, pérgolas bioclimáticas barcelona, pérgolas bioclimáticas cataluña, toldos barcelona, cortinas de cristal cataluña',
   image: DEFAULT_SOCIAL_IMAGE_URL,
 };
 
 const seoByRoute = {
   '/': {
-    title: 'Umbral | Pergolas bioclimaticas premium en Cataluna',
-    description: 'Umbral disena e instala pergolas bioclimaticas, toldos y cortinas de cristal en Barcelona, Girona y toda Cataluna.',
-    keywords: 'pergolas bioclimaticas cataluna, pergolas barcelona, pergolas girona, toldos cataluna, cortinas de cristal barcelona',
+    title: 'Umbral | Pérgolas bioclimáticas en Barcelona y Cataluña',
+    description: 'Umbral diseña e instala pérgolas bioclimáticas, toldos y cortinas de cristal en Barcelona, Girona y toda Cataluña.',
+    keywords: 'umbral pergolas barcelona, pérgolas bioclimáticas barcelona, pérgolas girona, toldos cataluña, cortinas de cristal barcelona',
     image: BRAND_LOGO_URL,
   },
+  '/productos/pergolas-bioclimaticas': {
+    title: 'Pérgolas bioclimáticas en Barcelona y Cataluña | Umbral',
+    description: 'Diseño e instalación de pérgolas bioclimáticas en Barcelona y Cataluña para viviendas, terrazas, jardines y proyectos profesionales.',
+    keywords: 'pérgolas bioclimáticas en barcelona, pérgolas barcelona, pérgolas bioclimáticas cataluña, instalación de pérgolas barcelona, umbral pérgolas',
+    image: `${SITE_URL}/images/pergolas.jpg`,
+  },
   '/productos': {
-    title: 'Productos Umbral | Pergolas, Toldos y Cortinas de Cristal',
-    description: 'Catalogo premium de soluciones exteriores en Cataluna: pergolas bioclimaticas, toldos y cortinas de cristal para residencial y contract.',
-    keywords: 'productos pergolas bioclimaticas, toldos premium, cortinas de cristal cataluna, pergolas barcelona girona',
+    title: 'Productos Umbral | Pérgolas, Toldos y Cortinas de Cristal en Cataluña',
+    description: 'Catálogo premium de soluciones exteriores en Cataluña: pérgolas bioclimáticas, toldos y cortinas de cristal para residencial y contract.',
+    keywords: 'productos pérgolas bioclimáticas, toldos premium, cortinas de cristal cataluña, pérgolas barcelona girona',
     image: `${SITE_URL}/images/pergolas.jpg`,
   },
   '/proyectos': {
-    title: 'Proyectos Umbral en Cataluna | Barcelona y Girona',
-    description: 'Descubre proyectos reales de pergolas bioclimaticas y cerramientos exteriores ejecutados por Umbral en Cataluna.',
-    keywords: 'proyectos pergolas cataluna, pergolas barcelona, pergolas girona, proyectos exteriores premium',
+    title: 'Proyectos Umbral en Cataluña | Barcelona y Girona',
+    description: 'Descubre proyectos reales de pérgolas bioclimáticas y cerramientos exteriores ejecutados por Umbral en Cataluña.',
+    keywords: 'proyectos pérgolas cataluña, pérgolas barcelona, pérgolas girona, proyectos exteriores premium',
     image: `${SITE_URL}/images/cortinacristal_horeca_azur_st_post_1.jpg`,
   },
   '/empresa': {
-    title: 'Empresa Umbral | Especialistas en Exterior Premium en Cataluna',
-    description: 'Conoce Umbral, especialistas en diseno e instalacion de soluciones exteriores premium en Barcelona, Girona y toda Cataluna.',
-    keywords: 'empresa pergolas cataluna, instaladores pergolas barcelona, expertos toldos girona',
+    title: 'Empresa Umbral | Especialistas en Exterior Premium en Cataluña',
+    description: 'Conoce Umbral, especialistas en diseño e instalación de soluciones exteriores premium en Barcelona, Girona y toda Cataluña.',
+    keywords: 'empresa pérgolas cataluña, instaladores de pérgolas barcelona, expertos toldos girona',
     image: `${SITE_URL}/images/pergola_bioclimatica_p_190_principal.jpg`,
   },
   '/empresa/admin': {
@@ -467,59 +473,63 @@ const seoByRoute = {
     image: BRAND_LOGO_URL,
   },
   '/contacto': {
-    title: 'Contacto Umbral | Presupuesto en Cataluna',
-    description: 'Solicita presupuesto para pergolas bioclimaticas, toldos y cortinas de cristal en Barcelona, Girona, Tarragona y Lleida.',
-    keywords: 'presupuesto pergolas barcelona, contacto pergolas girona, toldos tarragona, cortinas de cristal lleida',
+    title: 'Contacto Umbral | Presupuesto en Cataluña',
+    description: 'Solicita presupuesto para pérgolas bioclimáticas, toldos y cortinas de cristal en Barcelona, Girona, Tarragona y Lleida.',
+    keywords: 'presupuesto pérgolas barcelona, contacto pérgolas girona, toldos tarragona, cortinas de cristal lleida',
     image: `${SITE_URL}/images/logo.png`,
   },
   '/productos/toldos': {
-    title: 'Toldos Premium en Cataluna | Umbral',
-    description: 'Toldos premium para terrazas y porches en Barcelona, Girona y toda Cataluna. Soluciones a medida con instalacion profesional.',
-    keywords: 'toldos barcelona, toldos girona, toldos premium cataluna, instalacion toldos',
+    title: 'Toldos Premium en Cataluña | Umbral',
+    description: 'Toldos premium para terrazas y porches en Barcelona, Girona y toda Cataluña. Soluciones a medida con instalación profesional.',
+    keywords: 'toldos barcelona, toldos girona, toldos premium cataluña, instalación toldos',
     image: `${SITE_URL}/images/toldos.jpg`,
   },
   '/barcelona': {
-    title: 'Pergolas bioclimaticas en Barcelona | Umbral',
-    description: 'Diseno e instalacion de pergolas bioclimaticas, toldos y cortinas de cristal en Barcelona y area metropolitana.',
-    keywords: 'pergolas bioclimaticas barcelona, toldos barcelona, cortinas de cristal barcelona, pergolas premium barcelona',
+    title: 'Pérgolas bioclimáticas en Barcelona | Umbral',
+    description: 'Diseño e instalación de pérgolas bioclimáticas, toldos y cortinas de cristal en Barcelona y área metropolitana.',
+    keywords: 'pérgolas bioclimáticas barcelona, toldos barcelona, cortinas de cristal barcelona, pérgolas premium barcelona',
     image: `${SITE_URL}/images/pergola_bioclimatica_p_190_principal.jpg`,
   },
   '/girona': {
-    title: 'Pergolas bioclimaticas en Girona | Umbral',
-    description: 'Soluciones exteriores premium en Girona y Costa Brava: pergolas bioclimaticas, toldos y cerramientos de cristal.',
-    keywords: 'pergolas girona, toldos girona, pergolas bioclimaticas costa brava, cerramientos girona',
+    title: 'Pérgolas bioclimáticas en Girona | Umbral',
+    description: 'Soluciones exteriores premium en Girona y Costa Brava: pérgolas bioclimáticas, toldos y cerramientos de cristal.',
+    keywords: 'pérgolas girona, toldos girona, pérgolas bioclimáticas costa brava, cerramientos girona',
     image: `${SITE_URL}/images/saxun_pergola_bioclimatica_sprinter_31_1.jpg`,
   },
   '/tarragona': {
-    title: 'Pergolas bioclimaticas en Tarragona | Umbral',
-    description: 'Instalacion de pergolas bioclimaticas y toldos en Tarragona y Costa Daurada para residencial y horeca.',
-    keywords: 'pergolas tarragona, toldos tarragona, pergolas bioclimaticas costa daurada, cerramientos tarragona',
+    title: 'Pérgolas bioclimáticas en Tarragona | Umbral',
+    description: 'Instalación de pérgolas bioclimáticas y toldos en Tarragona y Costa Daurada para residencial y horeca.',
+    keywords: 'pérgolas tarragona, toldos tarragona, pérgolas bioclimáticas costa daurada, cerramientos tarragona',
     image: `${SITE_URL}/images/proyecto_pergola_bioclimatica_p_190_atico_campello_r_t7a9519.jpg`,
   },
   '/lleida': {
-    title: 'Pergolas bioclimaticas en Lleida | Umbral',
-    description: 'Proyectos de pergolas bioclimaticas, toldos y cortinas de cristal en Lleida con acabados premium.',
-    keywords: 'pergolas lleida, toldos lleida, pergolas bioclimaticas lleida, cerramientos de cristal lleida',
+    title: 'Pérgolas bioclimáticas en Lleida | Umbral',
+    description: 'Proyectos de pérgolas bioclimáticas, toldos y cortinas de cristal en Lleida con acabados premium.',
+    keywords: 'pérgolas lleida, toldos lleida, pérgolas bioclimáticas lleida, cerramientos de cristal lleida',
     image: `${SITE_URL}/images/pergolas.jpg`,
   },
 };
 
 if (product) {
-  seoByRoute[normalizedPath] = {
-    title: `${product.title} | Umbral Cataluna`,
-    description: `${product.title} de Umbral: diseno e instalacion en Barcelona, Girona y Cataluna con acabados premium para exterior.`,
-    keywords: `${product.title.toLowerCase()}, ${product.title.toLowerCase()} barcelona, ${product.title.toLowerCase()} girona, ${product.title.toLowerCase()} cataluna`,
-    image: `${SITE_URL}${product.image}`,
-  };
+  if (!seoByRoute[normalizedPath]) {
+    seoByRoute[normalizedPath] = {
+      title: `${product.title} | Umbral Cataluña`,
+      description: `${product.title} de Umbral: diseño e instalación en Barcelona, Girona y Cataluña con acabados premium para exterior.`,
+      keywords: `${product.title.toLowerCase()}, ${product.title.toLowerCase()} barcelona, ${product.title.toLowerCase()} girona, ${product.title.toLowerCase()} cataluña`,
+      image: `${SITE_URL}${product.image}`,
+    };
+  }
 }
 
 if (toldoModel) {
-  seoByRoute[normalizedPath] = {
-    title: `${toldoModel.title} | Umbral Cataluna`,
-    description: `${toldoModel.title} de Umbral para proyectos en Barcelona, Girona y Cataluna con instalacion profesional y enfoque premium.`,
-    keywords: `${toldoModel.title.toLowerCase()}, ${toldoModel.title.toLowerCase()} barcelona, ${toldoModel.title.toLowerCase()} girona, toldos cataluna`,
-    image: `${SITE_URL}${toldoModel.image}`,
-  };
+  if (!seoByRoute[normalizedPath]) {
+    seoByRoute[normalizedPath] = {
+      title: `${toldoModel.title} | Umbral Cataluña`,
+      description: `${toldoModel.title} de Umbral para proyectos en Barcelona, Girona y Cataluña con instalación profesional y enfoque premium.`,
+      keywords: `${toldoModel.title.toLowerCase()}, ${toldoModel.title.toLowerCase()} barcelona, ${toldoModel.title.toLowerCase()} girona, toldos cataluña`,
+      image: `${SITE_URL}${toldoModel.image}`,
+    };
+  }
 }
 
 Object.entries(cityProductPages).forEach(([route, page]) => {
