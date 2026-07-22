@@ -175,14 +175,78 @@ const buildModelDescription = (model) => {
   return parts.filter(Boolean).join('\n');
 };
 
-const createLineItemFromModel = (model) => ({
-  id: `item-${Date.now()}`,
-  title: model?.offerTitle || model?.name || 'Elemento',
-  description: buildModelDescription(model),
-  image: model?.technicalImage || model?.commercialImage || '/images/logo.png',
-  unitPrice: String(model?.basePrice || 0),
-  quantity: 1,
-});
+const findProductById = (productId) => adminCatalog.find((product) => product.id === productId) || adminCatalog[0] || null;
+
+const findCollectionById = (product, collectionId) => product?.collections?.find((collection) => collection.id === collectionId) || product?.collections?.[0] || null;
+
+const findModelById = (collection, modelId) => collection?.models?.find((model) => model.id === modelId) || collection?.models?.[0] || null;
+
+const createLineItemFromSelection = ({
+  id,
+  productId,
+  collectionId,
+  modelId,
+  title,
+  description,
+  image,
+  unitPrice,
+  quantity,
+  measures,
+} = {}) => {
+  const product = findProductById(productId);
+  const collection = findCollectionById(product, collectionId);
+  const model = findModelById(collection, modelId);
+
+  return {
+    id: id || `item-${Date.now()}`,
+    productId: product?.id || '',
+    collectionId: collection?.id || '',
+    modelId: model?.id || '',
+    title: title || model?.offerTitle || model?.name || 'Elemento',
+    description: description ?? buildModelDescription(model),
+    image: image || model?.technicalImage || model?.commercialImage || product?.coverImage || '/images/logo.png',
+    unitPrice: unitPrice ?? String(model?.basePrice || 0),
+    quantity: quantity ?? 1,
+    measures: {
+      width: measures?.width || '',
+      depth: measures?.depth || '',
+      height: measures?.height || '',
+    },
+  };
+};
+
+const buildLineItemMeasureSummary = (item, product) => {
+  if (!item || product?.id !== 'pergolas') {
+    return '';
+  }
+
+  const width = String(item?.measures?.width || '').trim();
+  const depth = String(item?.measures?.depth || '').trim();
+  const height = String(item?.measures?.height || '').trim();
+  const parts = [];
+
+  if (width) {
+    parts.push(`Ancho: ${width} mm`);
+  }
+  if (depth) {
+    parts.push(`Largo: ${depth} mm`);
+  }
+  if (height) {
+    parts.push(`Alto: ${height} mm`);
+  }
+
+  if (!parts.length) {
+    return '';
+  }
+
+  return `Medidas de pérgola (${parts.join(' · ')})`;
+};
+
+const buildLineItemDescription = (item, model, product) => {
+  const baseDescription = String(item?.description || buildModelDescription(model) || '').trim();
+  const measuresSummary = buildLineItemMeasureSummary(item, product);
+  return [baseDescription, measuresSummary].filter(Boolean).join('\n');
+};
 
 const createAccessoryLine = (option, index = 0) => ({
   id: `acc-${Date.now()}-${index}`,
@@ -265,7 +329,11 @@ function AdminQuotePortal() {
 
   const modelCommercialDescription = selectedModel?.commercialDescription || selectedProduct?.marketingSummary || selectedModel?.technicalDescription || '';
 
-  const [lineItems, setLineItems] = useState(() => [createLineItemFromModel(adminCatalog[0]?.collections?.[0]?.models?.[0])]);
+  const [lineItems, setLineItems] = useState(() => [createLineItemFromSelection({
+    productId: adminCatalog[0]?.id,
+    collectionId: adminCatalog[0]?.collections?.[0]?.id,
+    modelId: adminCatalog[0]?.collections?.[0]?.models?.[0]?.id,
+  })]);
   const [accessoryLines, setAccessoryLines] = useState([]);
 
   useEffect(() => {
@@ -286,26 +354,43 @@ function AdminQuotePortal() {
     setLineItems((prev) => {
       const next = [...prev];
       if (next.length === 0) {
-        return [createLineItemFromModel(selectedModel)];
+        return [createLineItemFromSelection({
+          productId: selectedProduct?.id,
+          collectionId: selectedCollection?.id,
+          modelId: selectedModel?.id,
+        })];
       }
 
-      next[0] = {
-        ...next[0],
-        title: selectedModel.offerTitle || selectedModel.name,
-        description: buildModelDescription(selectedModel),
-        image: selectedModel.technicalImage || selectedModel.commercialImage,
-        unitPrice: String(selectedModel.basePrice || 0),
-      };
+      next[0] = createLineItemFromSelection({
+        id: next[0].id,
+        productId: selectedProduct?.id,
+        collectionId: selectedCollection?.id,
+        modelId: selectedModel?.id,
+        quantity: next[0]?.quantity,
+        measures: next[0]?.measures,
+      });
       return next;
     });
-  }, [selectedModel]);
+  }, [selectedModel, selectedCollection, selectedProduct]);
 
   const proposalItems = useMemo(() => {
-    const normalizedMainItems = lineItems.map((item) => ({
-      ...item,
-      unitPriceValue: parseNumber(item.unitPrice),
-      quantityValue: Math.max(1, Number.parseInt(String(item.quantity), 10) || 1),
-    })).filter((item) => item.title.trim() || item.unitPriceValue > 0);
+    const normalizedMainItems = lineItems.map((item) => {
+      const itemProduct = findProductById(item.productId);
+      const itemCollection = findCollectionById(itemProduct, item.collectionId);
+      const itemModel = findModelById(itemCollection, item.modelId);
+
+      return {
+        ...item,
+        productName: itemProduct?.name || '',
+        collectionName: itemCollection?.name || '',
+        modelName: itemModel?.name || '',
+        title: item.title || itemModel?.offerTitle || itemModel?.name || 'Elemento',
+        description: buildLineItemDescription(item, itemModel, itemProduct),
+        image: item.image || itemModel?.technicalImage || itemModel?.commercialImage || itemProduct?.coverImage || '/images/logo.png',
+        unitPriceValue: parseNumber(item.unitPrice),
+        quantityValue: Math.max(1, Number.parseInt(String(item.quantity), 10) || 1),
+      };
+    }).filter((item) => item.title.trim() || item.unitPriceValue > 0);
 
     const normalizedAccessories = accessoryLines
       .map((line, index) => {
@@ -395,17 +480,16 @@ function AdminQuotePortal() {
   };
 
   const addCustomLineItem = () => {
-    setLineItems((prev) => ([
-      ...prev,
-      {
+    setLineItems((prev) => {
+      const created = createLineItemFromSelection({
         id: `item-${Date.now()}-${prev.length}`,
+        productId: selectedProduct?.id,
+        collectionId: selectedCollection?.id,
+        modelId: selectedModel?.id,
         title: 'Elemento adicional',
-        description: '',
-        image: selectedModel?.technicalImage || selectedProduct?.coverImage || '/images/logo.png',
-        unitPrice: '0',
-        quantity: 1,
-      },
-    ]));
+      });
+      return [...prev, created];
+    });
   };
 
   const updateLineItem = (id, field, value) => {
@@ -419,6 +503,74 @@ function AdminQuotePortal() {
       }
       return prev.filter((item) => item.id !== id);
     });
+  };
+
+  const handleLineItemProductChange = (id, productId) => {
+    setLineItems((prev) => prev.map((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+
+      return createLineItemFromSelection({
+        id: item.id,
+        productId,
+        collectionId: item.collectionId,
+        modelId: item.modelId,
+        quantity: item.quantity,
+        measures: item.measures,
+      });
+    }));
+  };
+
+  const handleLineItemCollectionChange = (id, collectionId) => {
+    setLineItems((prev) => prev.map((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+
+      return createLineItemFromSelection({
+        id: item.id,
+        productId: item.productId,
+        collectionId,
+        modelId: item.modelId,
+        quantity: item.quantity,
+        measures: item.measures,
+      });
+    }));
+  };
+
+  const handleLineItemModelChange = (id, modelId) => {
+    setLineItems((prev) => prev.map((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+
+      return createLineItemFromSelection({
+        id: item.id,
+        productId: item.productId,
+        collectionId: item.collectionId,
+        modelId,
+        quantity: item.quantity,
+        measures: item.measures,
+      });
+    }));
+  };
+
+  const handleLineItemMeasureChange = (id, field, value) => {
+    const normalized = value.replace(/[^\d]/g, '');
+    setLineItems((prev) => prev.map((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+
+      return {
+        ...item,
+        measures: {
+          ...(item.measures || {}),
+          [field]: normalized,
+        },
+      };
+    }));
   };
 
   const buildBudgetChannelsMessage = () => {
@@ -985,6 +1137,10 @@ function AdminQuotePortal() {
               {lineItems.map((item, index) => {
                 const unitValue = parseNumber(item.unitPrice);
                 const qtyValue = Math.max(1, Number.parseInt(String(item.quantity), 10) || 1);
+                const itemProduct = findProductById(item.productId);
+                const itemCollection = findCollectionById(itemProduct, item.collectionId);
+                const isPergolaItem = itemProduct?.id === 'pergolas';
+
                 return (
                   <article className="admin-line-item-card" key={item.id}>
                     <div className="admin-line-item-top">
@@ -994,6 +1150,33 @@ function AdminQuotePortal() {
                           <FiTrash2 /> Quitar
                         </button>
                       )}
+                    </div>
+
+                    <div className="field-group full">
+                      <label>Producto</label>
+                      <select value={item.productId || ''} onChange={(event) => handleLineItemProductChange(item.id, event.target.value)}>
+                        {adminCatalog.map((product) => (
+                          <option key={product.id} value={product.id}>{product.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="field-group half">
+                      <label>Colección</label>
+                      <select value={item.collectionId || ''} onChange={(event) => handleLineItemCollectionChange(item.id, event.target.value)}>
+                        {(itemProduct?.collections || []).map((collection) => (
+                          <option key={collection.id} value={collection.id}>{collection.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="field-group half">
+                      <label>Modelo</label>
+                      <select value={item.modelId || ''} onChange={(event) => handleLineItemModelChange(item.id, event.target.value)}>
+                        {(itemCollection?.models || []).map((model) => (
+                          <option key={model.id} value={model.id}>{model.name}</option>
+                        ))}
+                      </select>
                     </div>
 
                     <div className="field-group full">
@@ -1019,6 +1202,44 @@ function AdminQuotePortal() {
                         ))}
                       </select>
                     </div>
+
+                    {isPergolaItem && (
+                      <>
+                        <div className="field-group full">
+                          <label>Medidas de pérgola (mm)</label>
+                        </div>
+
+                        <div className="field-group half">
+                          <label>Ancho (mm)</label>
+                          <input
+                            inputMode="numeric"
+                            placeholder="Ej: 4000"
+                            value={item.measures?.width || ''}
+                            onChange={(event) => handleLineItemMeasureChange(item.id, 'width', event.target.value)}
+                          />
+                        </div>
+
+                        <div className="field-group half">
+                          <label>Largo (mm)</label>
+                          <input
+                            inputMode="numeric"
+                            placeholder="Ej: 5000"
+                            value={item.measures?.depth || ''}
+                            onChange={(event) => handleLineItemMeasureChange(item.id, 'depth', event.target.value)}
+                          />
+                        </div>
+
+                        <div className="field-group half">
+                          <label>Alto (mm)</label>
+                          <input
+                            inputMode="numeric"
+                            placeholder="Ej: 2600"
+                            value={item.measures?.height || ''}
+                            onChange={(event) => handleLineItemMeasureChange(item.id, 'height', event.target.value)}
+                          />
+                        </div>
+                      </>
+                    )}
 
                     <p className="admin-line-item-total">Importe total elemento: <strong>{formatCurrency(unitValue * qtyValue)}</strong></p>
                   </article>
